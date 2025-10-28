@@ -1,3 +1,5 @@
+/* ====== PANTALLA PRINCIPAL ====== */
+
 body {
   background-color: #000;
   color: #00ff66;
@@ -95,11 +97,7 @@ h1 {
 
 
 
-
-
-
-
-
+/* ====== SUBSECCIÓN RED DE ARTICULOS ====== */
 
 
 .lista-articulos {
@@ -137,4 +135,65 @@ h1 {
   border: 2px solid #00ff66;
   box-shadow: 0 0 15px #00ff66;
   border-radius: 8px;
+}
+
+
+
+
+/* ====== SUBSECCIÓN RED DE PROYECTOS ====== */
+
+
+.red-page {
+  background: radial-gradient(circle at center, #000 60%, #001122 100%);
+  color: #00ffff;
+  text-align: center;
+  padding: 40px;
+}
+
+.red-page h1 {
+  color: #00ffff;
+  text-shadow: 0 0 8px #00ffff;
+}
+
+.lista-proyectos {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0;
+}
+
+.lista-proyectos li {
+  margin: 15px 0;
+}
+
+.red-page .proyecto {
+  display: inline-block;
+  padding: 12px 25px;
+  border: 1px solid #00ffff;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #00ffff;
+  font-family: "Courier New", monospace;
+  transition: all 0.3s ease;
+}
+
+.red-page .proyecto:hover {
+  background-color: #00ffff;
+  color: #000;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.red-page .volver {
+  display: inline-block;
+  margin-top: 30px;
+  color: #00ffff;
+  text-decoration: none;
+  border: 1px solid #00ffff;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.red-page .volver:hover {
+  background-color: #00ffff;
+  color: #000;
 }
