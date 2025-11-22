@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code_CRT - RETROTERM.AI</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    * {box-sizing: border-box; margin: 0; padding: 0; }
+    body{
+      background: #000;
+      color: #00ff66;
+      font-family: 'Courier New', monospace;
+      padding: 40px 10px;
+    }
+    
+    .marco{
+      max-width: 900px;
+      width: 90%;
+      margin: 0 auto;
+      border: 2px solid #00ff66;
+      box-shadow: 0 0 15px #00ff66;
+      padding: 20px;
+      background: radial-gradient(circle at center, #001800, #000);
+    }
+    
+    .header{ text-align: center; margin-bottom: 25px; }
+    
+    h1{ 
+        font-size: 2rem; text-shadow: 0 0 8px #00ff66; margin-bottom: 8px; }
+    
+    h2{ 
+        font-size: 1.4rem; margin-bottom: 10px; }
+    
+    .sub{
+        color: #66ffb3; font-size: 0.9rem; }
+    
+    
+    .editor-box {
+      width: 100%;
+      border: 2px solid #00ff66;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .barra-herramientas{
+      background: #001a00;
+      color: #66ffb3;
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #00ff66;
+    }
+    
+    #code{
+      display: block;
+      width: 100%;
+      height: 500px; 
+      background: #000;
+      color: #00ff66;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      border: none;
+      outline: none;
+      padding: 15px;
+      resize: vertical;
+    }
+
+    .footer{
+      margin-top: 30px;
+      text-align: center;
+    }
+    
+    .volver{
+      display: inline-block;
+      color: #00ff66;
+      text-decoration: none;
+      border: 1px solid #00ff66;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+    
+    .back:hover {
+      background: #00ff66;
+      color: #000;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    
+    .blink { animation: blink 1.5s infinite; }
+  </style>
+</head>
+<body>
+<main class="pantalla seccion activa">
+    <div class="marco">
+            <div class="header">
+                <h1>MODO DESARROLLO<span class="blink"></span></h1>
+                    <h2>CODE<span class="blink">_</span>CRT</h2>
+                        <p class="sub">Editor de código retro integrado</p>
+            </div>
+
+    <div class="editor-box">
+      <div class="barra-herramientas">CODE_CRT v0.1
+
+      </div>
+        
+      <textarea id="code" spellcheck="false">
+// Bienvenido a CODE_CRT
+function retroTerm() {
+console.log("¡Estás en el editor RETRO!");
+// Escribe tu código aquí...}
+       </textarea>
+    </div>
+
+        <div class="footer">
+            <a href="index.html" class="Volver">⬅ Volver al HUB</a>
+        </div>
+  </div>
+</main>  
+</body>
+</html>

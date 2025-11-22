@@ -1,0 +1,106 @@
+/* ===== Contenedor principal ===== */
+h1 {
+  font-size: 2rem;
+  text-shadow: 0 0 8px #00ff66;
+}
+
+.pantalla {
+  width: 90%;
+  max-width: 900px;
+  border: 2px solid #00ff66;
+  box-shadow: 0 0 15px #00ff66;
+  padding: 20px;
+  background: radial-gradient(circle at center, #001800 0%, #000 80%);
+  margin: 40px auto;
+  display: none;
+}
+
+.activa,
+:target {
+  display: block;
+}
+
+.seccion {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ===== Cabecera ===== */
+.cabecera {
+  text-align: center;
+}
+
+.subtitulo {
+  color: #66ffb3;
+  font-size: 0.9rem;
+}
+
+/* ===== Enlace de retorno ===== */
+.volver {
+  display: inline-block;
+  text-decoration: none;
+  color: #00ff66;
+  border: 1px solid #00ff66;
+  padding: 6px 10px;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.volver:hover {
+  background-color: #00ff66;
+  color: #000;
+}
+
+/* ===== Pie de página específico ===== */
+.pie-seccion {
+  margin-top: 25px;
+  text-align: center;
+}
+
+/* ===== Cursor parpadeante ===== */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1.5s infinite;
+}
+
+/* ===== Tipografía y cuerpo ===== */
+body {
+  background-color: #000;
+  color: #00ff66;
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+.editor-contenedor {
+  width: 100%;
+  border: 2px solid #00ff66;
+  border-radius: 4px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.editor-contenedor textarea {
+  display: block;
+  width: 100%;
+  min-height: 450px;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  background: #000;
+  color: #00ff66;
+  border: none;
+  outline: none;
+  padding: 12px;
+  margin: 0;
+  resize: vertical;
+}
