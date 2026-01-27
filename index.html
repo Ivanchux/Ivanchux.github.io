@@ -7,7 +7,7 @@
   <meta name="description" content="es un entorno web en desarrollo concebido como un sistema retrofuturista de administración, desarrollo y comunicación entre usuarios. Su concepto combina la estética de las interfaces de terminal clásicas de los años 80/90 con la funcionalidad moderna del desarrollo web actual.">
   <link rel="canonical" href="https://ivanchux.github.io/">
   <link rel="stylesheet" href="estilos.css">
-  <link rel="stylesheet" href="editor.html">
+  <link rel="stylesheet" href="editor.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   
   <meta name="robots" content="index,follow">
@@ -23,21 +23,21 @@
 
   <section id="inicio" class="pantalla seccion activa">
     <header class="cabecera">
-      <h1>RETROTERM.AI<span class="cursor-blink">|</span></h1>
-      <p class="subtitulo">SISTEMA RETROFUTURISTA DE ADMINISTRACIÓN Y DESARROLLO</p>
+      <h1>RETROTERM.AI<a href="silo.html" class="cursor-link cursor-blink">|</a></h1>
+
+      <p class="subtitulo">SISTEMA RETROFUTURISTA DE ADMINISTRACIÓN Y DESARROLLO, GAMING Y DeFi</p>
     </header>
 
     <nav class="menu">
       <a href="editor.html" class="opcion">💻 MODO DESARROLLO</a>
       <a href="#asistente" class="opcion">🤖 ASISTENTE IA</a>
-      <a href="#articulos" class="opcion">📰 DOCUMENTAR</a>
+      <a href="#gaming" class="opcion">🎮 GAMING</a>
+      <a href="#crypto" class="opcion">💰 DeFi</a>
       <a href="articulos.html" class="opcion">📚 VER ARTÍCULOS</a>
       <a href="red.html" class="opcion">🌐 RED DE PROYECTOS</a>
     </nav>
 
     <footer class="pie">
-      <p> Descubre la <a href="red.html" class="texto-link">Red de Proyectos</a> y los <a href="articulos.html" class="texto-link">Artículos</a> 
-      de la comunidad.
       <p>RETROTERM.AI v0.1 © 2025 | Creado por Iván Brihuega Crespo</p>
     </footer>
   </section>
@@ -69,19 +69,34 @@
     <a href="#inicio" class="volver">⬅ Volver al HUB</a>
   </section>
 
-  
-<section id="articulos" class="pantalla seccion">
-  <header>
-    <h2>📰 ARTÍCULOS INFORMATIVOS</h2>
-  </header>
-  <p>Aquí podrás redactar y publicar artículos de información relevante para los usuarios.</p>
-  
-  <textarea placeholder="Escribe tu artículo aquí..." style="width:100%; height:200px; background:#000; color:#00ff66; border:2px solid #00ff66; font-family:'Courier New', monospace; padding:10px;"></textarea>
-  
-  <button style="margin-top:15px; padding:10px 20px; background:#00ff66; color:#000; border:none; cursor:pointer; font-family:'Courier New', monospace;">💾 Guardar artículo</button>
+  <section id="crypto" class="pantalla seccion">
+    <header>
+      <h2>💰 PRECIOS DE CRIPTOMONEDAS</h2>
+    </header>
 
+    <p>Consulta los precios en tiempo real usando CoinGecko API.</p>
+  <div id="crypto-prices">
+    <script>
+      async function obtenerPrecios() {
+      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin&vs_currencies=usd');
+      const data = await res.json();
+      const contenedor = document.getElementById('crypto-prices');
+      contenedor.innerHTML = Object.entries(data).map(([moneda, valor]) => 
+      `<p>${moneda.toUpperCase()}: $${valor.usd}</p>`).join('');
+      }
+      window.addEventListener('load', obtenerPrecios);
+    </script>
+  </div>
+  </section>
+  
+  <section id="silo" class="pantalla seccion">
+  <header>
+    <h2>🗄️ SILO DEL SISTEMA</h2>
+  </header>
+  <p>Zona interna del sistema RETROTERM.AI.</p>
   <a href="#inicio" class="volver">⬅ Volver al HUB</a>
-</section>
+  </section>
+
 
 </body>
 </html>
