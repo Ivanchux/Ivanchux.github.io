@@ -17,40 +17,38 @@
   </header>
 
   <div class="editor-marco">
-    <div class="editor-barra">CODE_CRT v0.1 — Retro Integrated</div>
+    <div class="editor-barra">
+      <span>CODE_CRT v0.1 &mdash; Retro Integrated</span>
+      <span class="editor-barra-estado" id="estado">&#9679; LISTO</span>
+    </div>
 
     <div class="editor-contenedor">
-      <textarea id="html-editor" class="editor-crt" spellcheck="false">
-
-<!-- HTML -->
+      <div class="editor-label editor-label-html">HTML</div>
+      <textarea id="html-editor" class="editor-crt" spellcheck="false"><!-- HTML -->
 <h1>Hola RetroTerm</h1>
-<p>Escribe HTML, CSS y JS a la vez</p>
-      </textarea>
+<p>Escribe HTML, CSS y JS a la vez</p></textarea>
 
-      <textarea id="css-editor" class="editor-crt" spellcheck="false">
-/* CSS */
+      <div class="editor-label editor-label-css">CSS</div>
+      <textarea id="css-editor" class="editor-crt" spellcheck="false">/* CSS */
 body { background: #000; color: #00ff66; font-family: 'Courier New', monospace; }
-h1 { text-shadow: 0 0 6px #00ff66; }
-      </textarea>
+h1 { text-shadow: 0 0 6px #00ff66; }</textarea>
 
-      <textarea id="js-editor" class="editor-crt" spellcheck="false">
-// JS
-console.log("RetroCRT funcionando!");
-      </textarea>
+      <div class="editor-label editor-label-js">JS</div>
+      <textarea id="js-editor" class="editor-crt" spellcheck="false">// JS
+console.log("RetroCRT funcionando!");</textarea>
     </div>
 
     <div class="editor-botones">
-      <button id="ejecutar">▶ Ejecutar</button>
-      <button id="limpiar">🧹 Limpiar Preview</button>
-      <button id="guardar">💾 Guardar</button>
-      <button id="cargar">📂 Cargar</button>
+      <button id="ejecutar">&#9654; Ejecutar</button>
+      <button id="limpiar">&#129529; Limpiar Preview</button>
+      <button id="guardar">&#128190; Guardar</button>
     </div>
 
     <iframe id="preview"></iframe>
 
   </div>
 
-  <a href="index.html#inicio" class="volver">⬅ Volver al HUB</a>
+  <a href="index.html" class="volver">&#8592; Volver al HUB</a>
 
 </section>
 

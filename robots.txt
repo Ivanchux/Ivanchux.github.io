@@ -1,4 +1,8 @@
-User-agent:
-Allow:/
-User-agent:Bingbot
-Disallow:/*pdf
+User-agent: *
+Allow: /
+Disallow: /*pdf
+
+User-agent: Bingbot
+Disallow: /*pdf
+
+Sitemap: https://ivanchux.github.io/sitemap.xml

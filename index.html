@@ -4,101 +4,126 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RETROTERM.AI</title>
-  <meta name="description" content="es un entorno web en desarrollo concebido como un sistema retrofuturista de administración, desarrollo y comunicación entre usuarios. Su concepto combina la estética de las interfaces de terminal clásicas de los años 80/90 con la funcionalidad moderna del desarrollo web actual.">
+  <meta name="description" content="Sistema retrofuturista de administración, desarrollo y comunicación entre usuarios. Combina la estética de terminales clásicos de los años 80/90 con funcionalidades modernas.">
   <link rel="canonical" href="https://ivanchux.github.io/">
   <link rel="stylesheet" href="estilos.css">
   <link rel="stylesheet" href="editor.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  
-  <meta name="robots" content="index,follow">
-  
-  <meta property="og:title" content="Retroterm.ai">
-  <meta property="og:description" content="El futuro de la edición en codigo">
-  <meta property="og:image" content="/Imagenes/retroterm_ai.jpg">
-  <meta property="og:url" content="https://ivanchux.github.io/">
-  <meta property="og:type" website>
 
+  <meta name="robots" content="index,follow">
+
+  <meta property="og:title" content="Retroterm.ai">
+  <meta property="og:description" content="El futuro de la edición en código">
+  <meta property="og:image" content="https://ivanchux.github.io/Imagenes/retroterm_ai.jpg">
+  <meta property="og:url" content="https://ivanchux.github.io/">
+  <meta property="og:type" content="website">
 </head>
 <body>
 
+  <input type="checkbox" id="menu-toggle" class="menu-toggle-input">
+
   <section id="inicio" class="pantalla seccion activa">
     <header class="cabecera">
+      <label for="menu-toggle" class="hamburguesa" aria-label="Abrir menú de navegación">&#9776;</label>
       <h1>RETROTERM.AI<a href="portal.html" class="cursor-link cursor-blink">|</a></h1>
-
       <p class="subtitulo">SISTEMA RETROFUTURISTA DE ADMINISTRACIÓN Y DESARROLLO, GAMING Y DeFi</p>
     </header>
 
-    <nav class="menu">
+    <nav class="menu" aria-label="Navegación principal">
       <a href="editor.html" class="opcion">💻 MODO DESARROLLO</a>
-      <a href="#asistente" class="opcion">🤖 ASISTENTE IA</a>
-      <a href="#gaming" class="opcion">🎮 GAMING</a>
-      <a href="#crypto" class="opcion">💰 DeFi</a>
+      <a href="asistente.html" class="opcion">🤖 ARIA</a>
+      <a href="gaming.html" class="opcion">🎮 GAMING</a>
+      <a href="defi.html" class="opcion">💰 DeFi</a>
       <a href="articulos.html" class="opcion">📚 VER ARTÍCULOS</a>
       <a href="red.html" class="opcion">🌐 RED DE PROYECTOS</a>
     </nav>
+
+    <div class="share-bar">
+      <span class="share-label">// COMPARTIR</span>
+      <a class="share-btn share-x"
+         href="https://twitter.com/intent/tweet?text=RETROTERM.AI%20—%20Sistema%20retrofuturista%20de%20desarrollo%20y%20administración&url=https://ivanchux.github.io/"
+         target="_blank" rel="noopener" aria-label="Compartir en X">𝕏</a>
+      <a class="share-btn share-wa"
+         href="https://wa.me/?text=RETROTERM.AI%20—%20Sistema%20retrofuturista%20https://ivanchux.github.io/"
+         target="_blank" rel="noopener" aria-label="Compartir en WhatsApp">WA</a>
+      <a class="share-btn share-li"
+         href="https://www.linkedin.com/sharing/share-offsite/?url=https://ivanchux.github.io/"
+         target="_blank" rel="noopener" aria-label="Compartir en LinkedIn">in</a>
+      <a class="share-btn share-tg"
+         href="https://t.me/share/url?url=https://ivanchux.github.io/&text=RETROTERM.AI"
+         target="_blank" rel="noopener" aria-label="Compartir en Telegram">TG</a>
+    </div>
 
     <footer class="pie">
       <p>RETROTERM.AI v0.1 © 2025 | Creado por Iván Brihuega Crespo</p>
     </footer>
   </section>
 
-  
+
   <section id="desarrollo" class="pantalla seccion">
     <header>
       <h2>💻 MODO DESARROLLO</h2>
     </header>
-    <p>Aquí irá el editor retro de código (mini Visual Studio).</p>
     <a href="#inicio" class="volver">⬅ Volver al HUB</a>
+    <nav class="nav-pie">
+      <a href="#asistente">🤖 Asistente IA</a>
+      <a href="defi.html">💰 DeFi</a>
+      <a href="articulos.html">📚 Artículos</a>
+      <a href="red.html">🌐 Red</a>
+    </nav>
   </section>
 
-  
-  <section id="asistente" class="pantalla seccion">
-    <header>
-      <h2>🤖 ASISTENTE IA</h2>
-    </header>
-    <p>Aquí podrás hablar con el agente de inteligencia artificial.</p>
-    <a href="#inicio" class="volver">⬅ Volver al HUB</a>
-  </section>
-
-  
   <section id="red" class="pantalla seccion">
     <header>
       <h2>🌐 RED DE PROYECTOS</h2>
     </header>
-    <p>Aquí se mostrará la red de usuarios y proyectos compartidos.</p>
     <a href="#inicio" class="volver">⬅ Volver al HUB</a>
+    <nav class="nav-pie">
+      <a href="#desarrollo">💻 Desarrollo</a>
+      <a href="#asistente">🤖 Asistente IA</a>
+      <a href="articulos.html">📚 Artículos</a>
+      <a href="red.html">🌐 Red</a>
+    </nav>
   </section>
 
   <section id="crypto" class="pantalla seccion">
     <header>
       <h2>💰 PRECIOS DE CRIPTOMONEDAS</h2>
     </header>
-
-    <p>Consulta los precios en tiempo real usando CoinGecko API.</p>
-  <div id="crypto-prices">
-    <script>
-      async function obtenerPrecios() {
-      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin&vs_currencies=usd');
-      const data = await res.json();
-      const contenedor = document.getElementById('crypto-prices');
-      contenedor.innerHTML = Object.entries(data).map(([moneda, valor]) => 
-      `<p>${moneda.toUpperCase()}: $${valor.usd}</p>`).join('');
-      }
-      window.addEventListener('load', obtenerPrecios);
-    </script>
-  </div>
+    <a href="#inicio" class="volver">⬅ Volver al HUB</a>
+    <nav class="nav-pie">
+      <a href="#desarrollo">💻 Desarrollo</a>
+      <a href="#asistente">🤖 Asistente IA</a>
+      <a href="articulos.html">📚 Artículos</a>
+      <a href="red.html">🌐 Red</a>
+    </nav>
   </section>
-  
+
   <section id="silo" class="pantalla seccion">
-  <header>
-    <h2>🗄️ SILO DEL SISTEMA</h2>
-  </header>
-  <p>Zona interna del sistema RETROTERM.AI.</p>
-  <a href="#inicio" class="volver">⬅ Volver al HUB</a>
+    <header>
+      <h2>🗄️ SILO DEL SISTEMA</h2>
+    </header>
+    <p>Zona interna del sistema RETROTERM.AI.</p>
+    <a href="turco.html" class="volver" style="border-color:#00ffff; color:#00ffff; margin-top:20px; display:inline-block;">♟ TURCO_v1 — ACCESO RESTRINGIDO</a>
+    <a href="#inicio" class="volver">⬅ Volver al HUB</a>
+    <nav class="nav-pie">
+      <a href="#desarrollo">💻 Desarrollo</a>
+      <a href="#asistente">🤖 Asistente IA</a>
+      <a href="articulos.html">📚 Artículos</a>
+      <a href="red.html">🌐 Red</a>
+    </nav>
   </section>
 
-
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var btn = document.querySelector(".hamburguesa");
+  var menu = document.querySelector(".menu");
+  if (btn && menu) {
+    btn.addEventListener("click", function() {
+      menu.classList.toggle("menu-visible");
+    });
+  }
+});
+</script>
 </body>
 </html>
-
-

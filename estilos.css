@@ -439,3 +439,416 @@ textarea#editor-crt:focus {
 
 
 
+
+
+
+/* ============================================================
+   SILO — Estructura de navegación jerárquica
+   index.html → articulos.html → articulo-retroterm.html
+   ============================================================ */
+
+/* Migas de pan (breadcrumbs) visuales */
+.breadcrumbs {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #66ffb3;
+  margin-bottom: 18px;
+  padding: 6px 10px;
+  border-left: 2px solid #00ff66;
+  background: rgba(0, 30, 0, 0.5);
+  letter-spacing: 1px;
+}
+
+.breadcrumbs a {
+  color: #00ff66;
+  text-decoration: none;
+  transition: text-shadow 0.2s;
+}
+
+.breadcrumbs a:hover {
+  text-shadow: 0 0 6px #00ff66;
+}
+
+.bread-sep {
+  margin: 0 8px;
+  color: #006633;
+}
+
+.bread-current {
+  color: #ffffff;
+}
+
+/* Enlace "Leer más" en tarjetas de artículo */
+.leer-mas {
+  display: inline-block;
+  margin-top: 15px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+/* Artículo completo (página individual del silo) */
+.articulo-completo {
+  margin-top: 20px;
+}
+
+.articulo-completo h4 {
+  color: #00ff66;
+  margin-top: 20px;
+  border-bottom: 1px solid #003300;
+  padding-bottom: 5px;
+}
+
+.articulo-completo ul,
+.articulo-completo ol {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  padding-left: 20px;
+}
+
+/* Botones de nav inferior en artículo individual */
+.nav-inferior {
+  margin-top: 25px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Enlace de texto inline */
+.texto-link {
+  color: #00ff66;
+  text-decoration: underline;
+  transition: text-shadow 0.2s;
+}
+.texto-link:hover {
+  text-shadow: 0 0 6px #00ff66;
+}
+
+
+
+/* ============================================================
+   MENÚ HAMBURGUESA — visible solo en móvil
+   Técnica: checkbox oculto + label visible + nav como overlay
+   ============================================================ */
+
+/* Ocultar el checkbox real */
+.menu-toggle-input {
+  display: none;
+}
+
+/* Botón hamburguesa: solo visible en móvil (se activa en media query) */
+.hamburguesa {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #00ff66;
+  text-shadow: 0 0 6px #00ff66;
+  user-select: none;
+  margin-bottom: 10px;
+}
+
+
+
+/* ============================================================
+   RESPONSIVE — Optimización para pantallas < 480px
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  /* --- Layout general --- */
+  .pantalla {
+    width: 95%;
+    padding: 15px 12px;
+    margin: 15px auto;
+    box-sizing: border-box;
+  }
+
+  /* --- Tipografía y cabecera --- */
+  h1 {
+    font-size: 1.3rem;
+    word-break: break-word;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  .subtitulo {
+    font-size: 0.75rem;
+    padding: 0 5px;
+  }
+
+  /* --- Mostrar el botón hamburguesa --- */
+  .hamburguesa {
+    display: block;
+  }
+
+  /* --- Ocultar menú por defecto en móvil --- */
+  .menu {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  /* --- Mostrar menú al activar el checkbox --- */
+  .menu-toggle-input:checked ~ .pantalla .menu,
+  .menu-toggle-input:checked ~ section .menu {
+    display: flex;
+  }
+
+  /* Solución alternativa: el label activa el checkbox y el menú
+     dentro de la misma sección */
+  .menu-toggle-input:checked + section .menu,
+  .menu-toggle-input:checked + .pantalla .menu {
+    display: flex;
+  }
+
+  /* --- Opciones de menú adaptadas --- */
+  .opcion {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 10px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    text-align: center;
+    flex: none;
+  }
+
+  /* --- Imágenes de artículo: ocupan ancho completo en móvil --- */
+  .imagen-articulo img {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  /* --- Artículos: reducir padding --- */
+  .articulo {
+    padding: 12px 10px;
+  }
+
+  .articulo h3 {
+    font-size: 0.95rem;
+  }
+
+  .articulo p,
+  .articulo li {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  /* --- Breadcrumbs en móvil: más compactos --- */
+  .breadcrumbs {
+    font-size: 0.68rem;
+    letter-spacing: 0;
+    word-break: break-word;
+  }
+
+  /* --- Botones "volver" y navegación inferior --- */
+  .volver {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .nav-inferior {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* --- Pie de página --- */
+  .pie {
+    font-size: 0.75rem;
+    margin-top: 20px;
+    padding-top: 8px;
+  }
+
+  /* --- Red de proyectos: lista vertical --- */
+  .lista-proyectos li {
+    margin: 10px 0;
+  }
+
+  .red-page .proyecto {
+    display: block;
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  /* --- Menú de artículo-completo también colapsable --- */
+  .menu-articulo {
+    display: none;
+  }
+
+  .menu-toggle-input:checked ~ .pantalla .menu-articulo {
+    display: flex;
+  }
+}
+
+/* ---- Clase añadida por JS al hacer click en hamburguesa ---- */
+@media (max-width: 480px) {
+  .menu.menu-visible {
+    display: flex !important;
+  }
+}
+
+/* ---- Nav pie: enlaces pequeños de navegación secundaria ---- */
+.nav-pie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 25px;
+  padding-top: 12px;
+  border-top: 1px solid #003300;
+}
+
+.nav-pie a {
+  color: #66ffb3;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  transition: opacity 0.2s, text-shadow 0.2s;
+}
+
+.nav-pie a:hover {
+  opacity: 1;
+  text-shadow: 0 0 6px #00ff66;
+}
+
+/* ---- Meta del artículo: tag + fecha ---- */
+.articulo-meta {
+  font-size: 0.75rem;
+  color: #66ffb3;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.articulo-tag {
+  border: 1px solid #00ff66;
+  padding: 1px 6px;
+  font-size: 0.7rem;
+  color: #00ff66;
+  margin-right: 6px;
+  letter-spacing: 2px;
+}
+
+/* ---- Bloque de código estilo terminal ---- */
+.codigo-bloque {
+  background: #000;
+  color: #00ff66;
+  border: 1px solid #003300;
+  padding: 12px 15px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  margin: 10px 0 18px 0;
+  white-space: pre;
+}
+
+@media (max-width: 480px) {
+  .codigo-bloque {
+    font-size: 0.75rem;
+    padding: 10px;
+  }
+}
+
+/* ---- Tabla SEO con divs ---- */
+.tabla-seo {
+  border: 1px solid #00ff66;
+  margin: 15px 0 20px 0;
+  font-size: 0.85rem;
+}
+
+.tabla-fila {
+  display: flex;
+  border-bottom: 1px solid #003300;
+}
+
+.tabla-fila:last-child {
+  border-bottom: none;
+}
+
+.tabla-fila div {
+  padding: 8px 12px;
+  flex: 1;
+  border-right: 1px solid #003300;
+  color: #e0e0e0;
+}
+
+.tabla-fila div:last-child {
+  border-right: none;
+}
+
+.tabla-cabecera div {
+  color: #00ff66;
+  background: rgba(0, 30, 0, 0.6);
+  font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .tabla-fila {
+    flex-direction: column;
+  }
+  .tabla-fila div {
+    border-right: none;
+    border-bottom: 1px solid #003300;
+    padding: 6px 10px;
+  }
+  .tabla-fila div:last-child {
+    border-bottom: none;
+  }
+  .tabla-cabecera {
+    display: none;
+  }
+}
+
+/* ===== BARRA COMPARTIR EN REDES ===== */
+.share-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #003300;
+  flex-wrap: wrap;
+}
+
+.share-label {
+  font-size: 0.7rem;
+  color: #00ff6655;
+  letter-spacing: 2px;
+}
+
+.share-btn {
+  display: inline-block;
+  padding: 5px 14px;
+  border: 1px solid #00ff6655;
+  color: #00ff66;
+  text-decoration: none;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  border-radius: 4px;
+}
+
+.share-btn:hover {
+  background: #00ff66;
+  color: #000;
+  box-shadow: 0 0 10px #00ff66;
+  border-color: #00ff66;
+}
+
+@media (max-width: 480px) {
+  .share-bar { gap: 8px; }
+  .share-btn { padding: 5px 10px; font-size: 0.72rem; }
+}

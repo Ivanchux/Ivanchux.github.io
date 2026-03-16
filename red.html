@@ -3,47 +3,302 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌐 Red de Proyectos - RETROTERM.AI</title>
+  <title>RED DE PROYECTOS — RETROTERM.AI</title>
   <link rel="stylesheet" href="estilos.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <meta property="og:title" content="Red de Proyectos - Retroterm.ai">
+  <meta property="og:title" content="Red de Proyectos — Retroterm.ai">
   <meta property="og:description" content="Explora los proyectos de los compañeros de RETROTERM.AI">
-  <meta property="og:image" content="/Proyecto Final/Imagenes/retroterm_ai.jpg">
+  <meta property="og:image" content="/Imagenes/retroterm_ai.jpg">
   <meta property="og:url" content="https://ivanchux.github.io/red.html">
+
+  <style>
+    .red-cabecera {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .red-cabecera h1 {
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      text-shadow: 0 0 10px #00ff66;
+    }
+    .red-cabecera p {
+      color: #66ffb3;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      margin-top: 6px;
+    }
+    .red-cabecera .contador {
+      font-size: 0.68rem;
+      color: #1a4a2a;
+      margin-top: 8px;
+      letter-spacing: 2px;
+    }
+
+    .red-lista {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 16px;
+      justify-content: center;
+    }
+
+    .proyecto-card {
+      border: 1px solid #00ff66;
+      background: rgba(0, 15, 0, 0.85);
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+    }
+    .proyecto-card:hover {
+      box-shadow: 0 0 18px rgba(0, 255, 102, 0.25);
+      border-color: #66ffb3;
+    }
+
+    .card-topbar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      background: rgba(0, 255, 102, 0.06);
+      border-bottom: 1px solid #003300;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+    }
+    .card-topbar .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #00ff66;
+      box-shadow: 0 0 4px #00ff66;
+    }
+    .card-topbar .url-label {
+      color: #00ff66;
+      font-size: 0.62rem;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .card-preview {
+      width: 100%;
+      height: 150px;
+      background: #000;
+      border-bottom: 1px solid #003300;
+      overflow: hidden;
+    }
+    .card-preview img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: brightness(0.85);
+    }
+    .card-preview-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #1a4a2a;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      gap: 10px;
+    }
+    .card-preview-placeholder span {
+      font-size: 2rem;
+      opacity: 0.3;
+    }
+
+    .card-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .card-emoji { font-size: 1.4rem; }
+    .card-nombre {
+      font-size: 0.95rem;
+      color: #00ff66;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+    .card-autor {
+      font-size: 0.72rem;
+      color: #66ffb3;
+      letter-spacing: 1px;
+    }
+    .card-desc {
+      font-size: 0.75rem;
+      color: #aaa;
+      line-height: 1.7;
+      flex: 1;
+    }
+    .card-btn {
+      display: block;
+      padding: 7px 8px;
+      background: rgba(0, 20, 0, 0.7);
+      border: 1px solid #00ff66;
+      color: #00ff66;
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-align: center;
+      margin-top: 6px;
+      transition: all 0.2s;
+    }
+    .card-btn:hover {
+      background: #00ff66;
+      color: #000;
+      box-shadow: 0 0 10px #00ff66;
+    }
+
+    .red-footer {
+      margin-top: 30px;
+      padding-top: 16px;
+      border-top: 1px solid #003300;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #1a4a2a;
+      line-height: 2;
+    }
+    .red-footer a { color: #00ff66; text-decoration: none; }
+    .red-footer a:hover { color: #66ffb3; }
+
+    @media (max-width: 480px) {
+      .red-lista { flex-direction: column; align-items: center; }
+      .proyecto-card { width: 100%; }
+      .red-cabecera h1 { font-size: 1.3rem; letter-spacing: 2px; }
+    }
+  </style>
 </head>
-
 <body>
-  <section id="red" class="pantalla seccion red-page activa">
-    <header class="cabecera">
-      <h1>🌐 RED DE PROYECTOS</h1>
-      <p class="subtitulo">Conectando las ideas del futuro</p>
-    </header>
 
-    <main class="contenido-red">
-      <p>Explora los proyectos de compañeros:</p>
+<section id="red" class="pantalla seccion activa">
 
-      <ul class="lista-proyectos">
-        <li><a href="https://alexwater2.github.io/" target="_blank" class="proyecto">🛩️ Proyecto de Alejandro Martínez</a></li>
-        <li><a href="https://sofiae21.github.io/" target="_blank" class="proyecto">🦇 Proyecto de Sofia Estringana</a></li>
-        <li><a href="https://danielmartin546.github.io/" target="_blank" class="proyecto">🚘 Proyecto de Daniel Martín</a></li>
-        <li><a href="https://carlitos2202.github.io/" target="_blank" class="proyecto">📡 Proyecto de Carlos Javier</a></li>
-        <li><a href="https://davidzhou-web.github.io/" target="_blank" class="proyecto">🐱‍💻 Proyecto de David Zhou</a></li>
-        
+  <div class="red-cabecera">
+    <h1>🌐 RED DE PROYECTOS</h1>
+    <p>// NODOS ACTIVOS EN LA RED</p>
+    <p class="contador">&gt; 5 proyectos indexados — ASIR CDM 2025/26</p>
+  </div>
 
-      </ul>
-    </main>
+  <div class="red-lista">
 
-    <footer class="pie">
-      <a href="index.html" class="volver">⬅ Volver al HUB</a>
-    <p>Esta sección forma parte del sistema RETROTERM.AI.  
-    Puedes volver al 
-    <a href="index.html" class="texto-link">HUB principal</a> 
-    o visitar los 
-    <a href="articulos.html" class="texto-link">Artículos</a>.
-    </p>
-      <p>RETROTERM.AI v0.1 © 2025 | Red de Proyectos</p>
-    </footer>
-  </section>
+    <!-- Alejandro Martínez -->
+    <div class="proyecto-card">
+      <div class="card-topbar">
+        <div class="dot"></div>
+        <span class="url-label">alexwater2.github.io</span>
+      </div>
+      <div class="card-preview">
+        <img src="Imagenes/Red/alejandro.png" alt="Preview Alejandro">
+        <div class="card-preview-placeholder">
+          <span>🛩️</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-emoji">🛩️</div>
+        <div class="card-nombre">Proyecto Alejandro</div>
+        <div class="card-autor">&gt; Alejandro Martínez</div>
+        <div class="card-desc">Proyecto web de Alejandro Martínez.</div>
+        <a href="https://alexwater2.github.io/" target="_blank" class="card-btn">▶ VISITAR</a>
+      </div>
+    </div>
+
+    <!-- Sofía Estringana -->
+    <div class="proyecto-card">
+      <div class="card-topbar">
+        <div class="dot"></div>
+        <span class="url-label">sofiae21.github.io</span>
+      </div>
+      <div class="card-preview">
+        <img src="Imagenes/Red/sofia.png" alt="Preview Sofía">
+        <div class="card-preview-placeholder">
+          <span>🦇</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-emoji">🦇</div>
+        <div class="card-nombre">Proyecto Sofía</div>
+        <div class="card-autor">&gt; Sofía Estringana</div>
+        <div class="card-desc">Proyecto web de Sofía Estringana.</div>
+        <a href="https://sofiae21.github.io/" target="_blank" class="card-btn">▶ VISITAR</a>
+      </div>
+    </div>
+
+    <!-- Daniel Martín -->
+    <div class="proyecto-card">
+      <div class="card-topbar">
+        <div class="dot"></div>
+        <span class="url-label">danielmartin546.github.io</span>
+      </div>
+      <div class="card-preview">
+        <img src="Imagenes/Red/daniel.png" alt="Preview Daniel">
+        <div class="card-preview-placeholder">
+          <span>🚘</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-emoji">🚘</div>
+        <div class="card-nombre">Proyecto Daniel</div>
+        <div class="card-autor">&gt; Daniel Martín</div>
+        <div class="card-desc">Proyecto web de Daniel Martín.</div>
+        <a href="https://danielmartin546.github.io/" target="_blank" class="card-btn">▶ VISITAR</a>
+      </div>
+    </div>
+
+    <!-- Carlos Javier -->
+    <div class="proyecto-card">
+      <div class="card-topbar">
+        <div class="dot"></div>
+        <span class="url-label">carlitos2202.github.io</span>
+      </div>
+      <div class="card-preview">
+        <img src="Imagenes/Red/carlos.png" alt="Preview Carlos">
+        <div class="card-preview-placeholder">
+          <span>📡</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-emoji">📡</div>
+        <div class="card-nombre">Proyecto Carlos</div>
+        <div class="card-autor">&gt; Carlos Javier</div>
+        <div class="card-desc">Proyecto web de Carlos Javier.</div>
+        <a href="https://carlitos2202.github.io/" target="_blank" class="card-btn">▶ VISITAR</a>
+      </div>
+    </div>
+
+    <!-- David Zhou -->
+    <div class="proyecto-card">
+      <div class="card-topbar">
+        <div class="dot"></div>
+        <span class="url-label">davidzhou-web.github.io</span>
+      </div>
+      <div class="card-preview">
+        <img src="Imagenes/Red/david.png" alt="Preview David">
+        <div class="card-preview-placeholder">
+          <span>🐱‍💻</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-emoji">🐱‍💻</div>
+        <div class="card-nombre">Proyecto David</div>
+        <div class="card-autor">&gt; David Zhou</div>
+        <div class="card-desc">Proyecto web de David Zhou.</div>
+        <a href="https://davidzhou-web.github.io/" target="_blank" class="card-btn">▶ VISITAR</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="red-footer">
+    <a href="index.html" class="volver">⬅ Volver al HUB</a><br><br>
+    Esta sección forma parte del sistema RETROTERM.AI.<br>
+    <a href="editor.html">💻 Editor</a> · <a href="articulos.html">📚 Artículos</a><br><br>
+    RETROTERM.AI v0.1 © 2025 | Red de Proyectos
+  </div>
+
+</section>
 </body>
 </html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeFi TERMINAL — RETROTERM.AI</title>
+  <meta name="description" content="Terminal de criptomonedas de RETROTERM.AI: precios en tiempo real, gráficas, glosario y noticias del mercado crypto.">
+  <meta property="og:title" content="DeFi Terminal — RETROTERM.AI">
+  <meta property="og:description" content="Precios crypto, gráficas y glosario DeFi en estilo terminal retro.">
+  <meta property="og:image" content="https://ivanchux.github.io/Imagenes/retroterm_ai.jpg">
+  <meta property="og:url" content="https://ivanchux.github.io/defi.html">
+
+  <link rel="canonical" href="https://ivanchux.github.io/defi.html">
+  <link rel="stylesheet" href="estilos.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <style>
+    /* ══ CABECERA ══ */
+    .defi-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .defi-header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      text-shadow: 0 0 10px #00ff66;
+    }
+    .defi-header p {
+      color: #66ffb3;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      margin-top: 6px;
+    }
+
+    /* ══ VISTA PRINCIPAL oculta cuando hay :target ══ */
+    .defi-main { display: block; }
+
+    #bitcoin:target ~ .defi-main,
+    #ethereum:target ~ .defi-main,
+    #solana:target ~ .defi-main,
+    #binancecoin:target ~ .defi-main,
+    #ripple:target ~ .defi-main,
+    #dogecoin:target ~ .defi-main,
+    #cardano:target ~ .defi-main,
+    #avalanche-2:target ~ .defi-main,
+    #chainlink:target ~ .defi-main,
+    #polkadot:target ~ .defi-main,
+    #uniswap:target ~ .defi-main,
+    #litecoin:target ~ .defi-main,
+    #glosario:target ~ .defi-main,
+    #noticias:target ~ .defi-main {
+      display: none;
+    }
+
+    /* ══ VISTAS DETALLE ocultas por defecto ══ */
+    .defi-detalle { display: none; }
+    .defi-detalle:target { display: block; }
+
+    /* ══ TABS DE NAVEGACIÓN ══ */
+    .defi-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #003300;
+      flex-wrap: wrap;
+    }
+    .defi-tab {
+      padding: 8px 16px;
+      border: 1px solid #003300;
+      border-bottom: none;
+      background: rgba(0, 15, 0, 0.6);
+      color: #1a4a2a;
+      text-decoration: none;
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      transition: 0.2s;
+    }
+    .defi-tab:hover, .defi-tab.activo {
+      color: #00ff66;
+      background: rgba(0, 30, 0, 0.8);
+      border-color: #00ff66;
+    }
+
+    /* ══ TABLA DE PRECIOS ══ */
+    .precios-wrap { overflow-x: auto; }
+    .precios-tabla {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    .precios-tabla th {
+      color: #1a4a2a;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      padding: 8px 12px;
+      text-align: right;
+      border-bottom: 1px solid #003300;
+    }
+    .precios-tabla th:first-child { text-align: left; }
+    .precios-tabla td {
+      padding: 10px 12px;
+      text-align: right;
+      border-bottom: 1px solid #030f03;
+      color: #ccc;
+    }
+    .precios-tabla td:first-child { text-align: left; }
+    .precios-tabla tr:hover td { background: rgba(0, 255, 102, 0.03); }
+    .coin-nombre { color: #00ff66; font-weight: bold; letter-spacing: 1px; }
+    .coin-sym { color: #1a4a2a; font-size: 0.7rem; margin-left: 6px; }
+    .subida { color: #00ff66; }
+    .bajada { color: #ff5555; }
+    .ver-btn {
+      font-size: 0.65rem;
+      color: #00ff66;
+      text-decoration: none;
+      border: 1px solid #003300;
+      padding: 3px 8px;
+      letter-spacing: 1px;
+      transition: 0.2s;
+    }
+    .ver-btn:hover { background: #00ff66; color: #000; }
+    #cargando-precios { text-align: center; padding: 30px; color: #1a4a2a; font-size: 0.8rem; letter-spacing: 2px; }
+
+    /* ══ DETALLE MONEDA ══ */
+    .detalle-moneda-header { margin-bottom: 16px; }
+    .detalle-moneda-header h2 { font-size: 1.3rem; letter-spacing: 3px; text-shadow: 0 0 8px #00ff66; }
+    .detalle-moneda-header p { color: #66ffb3; font-size: 0.75rem; letter-spacing: 2px; margin-top: 4px; }
+    .precio-actual {
+      font-size: 1.8rem;
+      color: #00ff66;
+      text-shadow: 0 0 10px #00ff66;
+      margin: 16px 0 4px 0;
+      letter-spacing: 2px;
+    }
+    .precio-cambio { font-size: 0.85rem; margin-bottom: 20px; }
+
+    /* ══ GRÁFICA CANVAS ══ */
+    .grafica-wrap {
+      border: 1px solid #003300;
+      background: #000;
+      padding: 10px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .grafica-titulo {
+      font-size: 0.65rem;
+      color: #1a4a2a;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    canvas {
+      width: 100%;
+      height: 160px;
+      display: block;
+    }
+    .grafica-cargando {
+      text-align: center;
+      padding: 60px 0;
+      color: #1a4a2a;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+
+    .detalle-datos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .dato {
+      border: 1px solid #003300;
+      padding: 5px 12px;
+      font-size: 0.72rem;
+      color: #66ffb3;
+      letter-spacing: 1px;
+    }
+    .dato span { color: #aaa; }
+    .detalle-desc {
+      font-size: 0.85rem;
+      color: #ccc;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    /* ══ GLOSARIO ══ */
+    .glosario-lista { margin-top: 10px; }
+    .glosario-item {
+      border-left: 2px solid #003300;
+      padding: 10px 16px;
+      margin-bottom: 12px;
+      background: rgba(0, 15, 0, 0.5);
+    }
+    .glosario-item h4 {
+      color: #00ff66;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+    .glosario-item p {
+      color: #aaa;
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+
+    /* ══ NOTICIAS ══ */
+    .noticia {
+      border: 1px solid #003300;
+      background: rgba(0, 15, 0, 0.5);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+    .noticia-meta {
+      font-size: 0.68rem;
+      color: #1a4a2a;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .noticia-meta .tag {
+      border: 1px solid #003300;
+      padding: 1px 6px;
+      color: #00ff66;
+      margin-right: 8px;
+      font-size: 0.65rem;
+    }
+    .noticia h4 {
+      color: #66ffb3;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .noticia p { color: #aaa; font-size: 0.8rem; line-height: 1.7; }
+
+    /* ══ VOLVER ══ */
+    .defi-volver {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 6px 14px;
+      border: 1px solid #00ff66;
+      color: #00ff66;
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      transition: 0.2s;
+    }
+    .defi-volver:hover { background: #00ff66; color: #000; }
+
+    /* ══ FOOTER ══ */
+    .defi-footer {
+      margin-top: 30px;
+      padding-top: 14px;
+      border-top: 1px solid #003300;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #1a4a2a;
+      line-height: 2;
+    }
+    .defi-footer a { color: #00ff66; text-decoration: none; }
+    .defi-footer a:hover { color: #66ffb3; }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 480px) {
+      .defi-header h1 { font-size: 1.3rem; letter-spacing: 2px; }
+      .precios-tabla { font-size: 0.72rem; }
+      .precio-actual { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     VISTAS DETALLE — se muestran con :target
+     ══════════════════════════════════════ -->
+
+<!-- BITCOIN -->
+<section id="bitcoin" class="pantalla seccion defi-detalle activa">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>₿ BITCOIN</h2>
+    <p>// La primera y más grande criptomoneda</p>
+  </div>
+  <div class="precio-actual" id="precio-bitcoin">Cargando...</div>
+  <div class="precio-cambio" id="cambio-bitcoin"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-bitcoin">Conectando con CoinGecko...</div>
+    <canvas id="canvas-bitcoin" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>BTC</span></div>
+    <div class="dato">Lanzamiento <span>2009</span></div>
+    <div class="dato">Creador <span>Satoshi Nakamoto</span></div>
+    <div class="dato">Máximo supply <span>21 millones</span></div>
+  </div>
+  <p class="detalle-desc">Bitcoin fue la primera criptomoneda descentralizada, creada en 2009 por una persona o grupo bajo el pseudónimo Satoshi Nakamoto. Funciona sobre una blockchain pública donde las transacciones son verificadas por una red distribuida de nodos. Su suministro está limitado a 21 millones de unidades, lo que lo hace deflacionario por diseño.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- ETHEREUM -->
+<section id="ethereum" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>Ξ ETHEREUM</h2>
+    <p>// La plataforma de contratos inteligentes</p>
+  </div>
+  <div class="precio-actual" id="precio-ethereum">Cargando...</div>
+  <div class="precio-cambio" id="cambio-ethereum"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-ethereum">Conectando con CoinGecko...</div>
+    <canvas id="canvas-ethereum" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>ETH</span></div>
+    <div class="dato">Lanzamiento <span>2015</span></div>
+    <div class="dato">Creador <span>Vitalik Buterin</span></div>
+    <div class="dato">Consenso <span>Proof of Stake</span></div>
+  </div>
+  <p class="detalle-desc">Ethereum introdujo los contratos inteligentes: programas que se ejecutan automáticamente en la blockchain sin necesidad de intermediarios. Es la base del ecosistema DeFi y de la mayoría de tokens y NFTs. En 2022 completó The Merge, migrando de Proof of Work a Proof of Stake y reduciendo su consumo energético un 99%.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- SOLANA -->
+<section id="solana" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>◎ SOLANA</h2>
+    <p>// Alta velocidad y bajas comisiones</p>
+  </div>
+  <div class="precio-actual" id="precio-solana">Cargando...</div>
+  <div class="precio-cambio" id="cambio-solana"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-solana">Conectando con CoinGecko...</div>
+    <canvas id="canvas-solana" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>SOL</span></div>
+    <div class="dato">Lanzamiento <span>2020</span></div>
+    <div class="dato">TPS <span>~65.000</span></div>
+    <div class="dato">Consenso <span>Proof of History</span></div>
+  </div>
+  <p class="detalle-desc">Solana destaca por su velocidad y bajas comisiones gracias a su mecanismo Proof of History. Puede procesar miles de transacciones por segundo frente a las decenas de Ethereum. Se ha convertido en una plataforma popular para NFTs, juegos blockchain y aplicaciones DeFi de alta frecuencia.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- BINANCE COIN -->
+<section id="binancecoin" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>◈ BNB</h2>
+    <p>// El token del mayor exchange del mundo</p>
+  </div>
+  <div class="precio-actual" id="precio-binancecoin">Cargando...</div>
+  <div class="precio-cambio" id="cambio-binancecoin"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-binancecoin">Conectando con CoinGecko...</div>
+    <canvas id="canvas-binancecoin" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>BNB</span></div>
+    <div class="dato">Lanzamiento <span>2017</span></div>
+    <div class="dato">Exchange <span>Binance</span></div>
+    <div class="dato">Red <span>BNB Chain</span></div>
+  </div>
+  <p class="detalle-desc">BNB nació como token de utilidad del exchange Binance para pagar comisiones con descuento. Con el tiempo evolucionó hasta tener su propia blockchain (BNB Chain), con un ecosistema DeFi propio. Binance es el mayor exchange centralizado del mundo por volumen de negociación.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- RIPPLE -->
+<section id="ripple" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>✕ XRP</h2>
+    <p>// Pagos internacionales ultrarrápidos</p>
+  </div>
+  <div class="precio-actual" id="precio-ripple">Cargando...</div>
+  <div class="precio-cambio" id="cambio-ripple"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-ripple">Conectando con CoinGecko...</div>
+    <canvas id="canvas-ripple" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>XRP</span></div>
+    <div class="dato">Lanzamiento <span>2012</span></div>
+    <div class="dato">Empresa <span>Ripple Labs</span></div>
+    <div class="dato">Velocidad <span>3-5 segundos</span></div>
+  </div>
+  <p class="detalle-desc">XRP está diseñado para facilitar transferencias internacionales de dinero de forma rápida y barata. Ripple Labs lo creó como alternativa al sistema SWIFT bancario tradicional. A diferencia de Bitcoin, XRP no es minado — todos los tokens existentes fueron pre-emitidos en el lanzamiento.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- DOGECOIN -->
+<section id="dogecoin" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>Ð DOGECOIN</h2>
+    <p>// El meme que se convirtió en moneda real</p>
+  </div>
+  <div class="precio-actual" id="precio-dogecoin">Cargando...</div>
+  <div class="precio-cambio" id="cambio-dogecoin"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-dogecoin">Conectando con CoinGecko...</div>
+    <canvas id="canvas-dogecoin" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>DOGE</span></div>
+    <div class="dato">Lanzamiento <span>2013</span></div>
+    <div class="dato">Creadores <span>Markus / Palmer</span></div>
+    <div class="dato">Supply <span>Ilimitado</span></div>
+  </div>
+  <p class="detalle-desc">Dogecoin nació en 2013 como broma basada en el meme del Shiba Inu. Sus creadores no esperaban que llegara a ningún lado, pero la comunidad lo adoptó masivamente. Elon Musk lo mencionó repetidamente en Twitter disparando su precio. Hoy tiene una capitalización de miles de millones y se usa para propinas y micropagos online.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- CARDANO -->
+<section id="cardano" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>₳ CARDANO</h2>
+    <p>// Blockchain académica y peer-reviewed</p>
+  </div>
+  <div class="precio-actual" id="precio-cardano">Cargando...</div>
+  <div class="precio-cambio" id="cambio-cardano"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-cardano">Conectando con CoinGecko...</div>
+    <canvas id="canvas-cardano" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>ADA</span></div>
+    <div class="dato">Lanzamiento <span>2017</span></div>
+    <div class="dato">Fundador <span>Charles Hoskinson</span></div>
+    <div class="dato">Consenso <span>Ouroboros PoS</span></div>
+  </div>
+  <p class="detalle-desc">Cardano se diferencia por su enfoque académico: cada actualización del protocolo pasa por revisión científica antes de implementarse. Fue cofundado por Charles Hoskinson, uno de los creadores originales de Ethereum. Su algoritmo de consenso Ouroboros fue el primero en ser probado matemáticamente como seguro.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- AVALANCHE -->
+<section id="avalanche-2" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2">▲ AVALANCHE</h2>
+    <p>// Velocidad y compatibilidad con Ethereum</p>
+  </div>
+  <div class="precio-actual" id="precio-avalanche-2">Cargando...</div>
+  <div class="precio-cambio" id="cambio-avalanche-2"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-avalanche-2">Conectando con CoinGecko...</div>
+    <canvas id="canvas-avalanche-2" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>AVAX</span></div>
+    <div class="dato">Lanzamiento <span>2020</span></div>
+    <div class="dato">Finalidad <span>&lt; 2 segundos</span></div>
+    <div class="dato">Compatible <span>EVM</span></div>
+  </div>
+  <p class="detalle-desc">Avalanche destaca por su velocidad de finalidad de transacciones, inferior a 2 segundos. Es compatible con la máquina virtual de Ethereum (EVM), lo que permite migrar proyectos fácilmente. Su arquitectura de tres cadenas (X, P, C) separa los casos de uso para optimizar el rendimiento de cada uno.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- CHAINLINK -->
+<section id="chainlink" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>⬡ CHAINLINK</h2>
+    <p>// El puente entre blockchain y el mundo real</p>
+  </div>
+  <div class="precio-actual" id="precio-chainlink">Cargando...</div>
+  <div class="precio-cambio" id="cambio-chainlink"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-chainlink">Conectando con CoinGecko...</div>
+    <canvas id="canvas-chainlink" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>LINK</span></div>
+    <div class="dato">Lanzamiento <span>2017</span></div>
+    <div class="dato">Tipo <span>Oracle Network</span></div>
+    <div class="dato">Fundador <span>Sergey Nazarov</span></div>
+  </div>
+  <p class="detalle-desc">Chainlink resuelve el problema del oráculo: cómo hacer que los contratos inteligentes accedan a datos del mundo real de forma segura. Sin oráculos, un contrato inteligente no puede saber el precio de una acción, el resultado de un partido o el clima. Chainlink es la red de oráculos descentralizada más utilizada del ecosistema.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- POLKADOT -->
+<section id="polkadot" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2">● POLKADOT</h2>
+    <p>// La red de redes blockchain</p>
+  </div>
+  <div class="precio-actual" id="precio-polkadot">Cargando...</div>
+  <div class="precio-cambio" id="cambio-polkadot"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-polkadot">Conectando con CoinGecko...</div>
+    <canvas id="canvas-polkadot" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>DOT</span></div>
+    <div class="dato">Lanzamiento <span>2020</span></div>
+    <div class="dato">Fundador <span>Gavin Wood</span></div>
+    <div class="dato">Tipo <span>Multichain</span></div>
+  </div>
+  <p class="detalle-desc">Polkadot fue creado por Gavin Wood, otro cofundador de Ethereum. Su objetivo es permitir que diferentes blockchains se comuniquen entre sí. Usa una cadena central llamada Relay Chain a la que se conectan paracadenas especializadas. Cada paracadena puede tener sus propias reglas optimizadas para un caso de uso concreto.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- UNISWAP -->
+<section id="uniswap" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>🦄 UNISWAP</h2>
+    <p>// El exchange descentralizado más grande</p>
+  </div>
+  <div class="precio-actual" id="precio-uniswap">Cargando...</div>
+  <div class="precio-cambio" id="cambio-uniswap"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-uniswap">Conectando con CoinGecko...</div>
+    <canvas id="canvas-uniswap" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>UNI</span></div>
+    <div class="dato">Lanzamiento <span>2020</span></div>
+    <div class="dato">Tipo <span>DEX / AMM</span></div>
+    <div class="dato">Red <span>Ethereum</span></div>
+  </div>
+  <p class="detalle-desc">Uniswap es el exchange descentralizado más usado del ecosistema Ethereum. A diferencia de los exchanges tradicionales con libro de órdenes, usa un modelo de Automated Market Maker (AMM): pools de liquidez aportados por usuarios que reciben comisiones a cambio. No necesitas cuenta ni KYC para operar.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- LITECOIN -->
+<section id="litecoin" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <div class="detalle-moneda-header">
+    <h2>Ł LITECOIN</h2>
+    <p>// La plata digital del Bitcoin</p>
+  </div>
+  <div class="precio-actual" id="precio-litecoin">Cargando...</div>
+  <div class="precio-cambio" id="cambio-litecoin"></div>
+  <div class="grafica-wrap">
+    <div class="grafica-titulo">&gt; PRECIO ÚLTIMOS 7 DÍAS (USD)</div>
+    <div class="grafica-cargando" id="loading-litecoin">Conectando con CoinGecko...</div>
+    <canvas id="canvas-litecoin" width="800" height="160" style="display:none;"></canvas>
+  </div>
+  <div class="detalle-datos">
+    <div class="dato">Símbolo <span>LTC</span></div>
+    <div class="dato">Lanzamiento <span>2011</span></div>
+    <div class="dato">Creador <span>Charlie Lee</span></div>
+    <div class="dato">Supply <span>84 millones</span></div>
+  </div>
+  <p class="detalle-desc">Litecoin fue creado en 2011 por Charlie Lee, ex-ingeniero de Google. Es un fork de Bitcoin con tiempos de bloque más rápidos (2.5 min vs 10 min) y un supply mayor. Durante años fue la tercera criptomoneda por capitalización. Se le conoce como la plata digital frente al oro digital de Bitcoin.</p>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- GLOSARIO -->
+<section id="glosario" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <h2 style="margin-bottom:16px; letter-spacing:3px; text-shadow:0 0 8px #00ff66;">📖 GLOSARIO CRYPTO</h2>
+  <p style="color:#66ffb3; font-size:0.78rem; letter-spacing:2px; margin-bottom:20px;">// Términos básicos del ecosistema blockchain y DeFi</p>
+  <div class="glosario-lista">
+    <div class="glosario-item"><h4>BLOCKCHAIN</h4><p>Cadena de bloques enlazados criptográficamente. Cada bloque contiene un conjunto de transacciones validadas y el hash del bloque anterior, haciendo prácticamente imposible alterar el historial.</p></div>
+
+    <div class="glosario-item"><h4>DeFi — Finanzas Descentralizadas</h4><p>Ecosistema de aplicaciones financieras construidas sobre blockchain que operan sin intermediarios como bancos. Incluye exchanges descentralizados, préstamos, staking y derivados.</p></div>
+
+    <div class="glosario-item"><h4>WALLET — Cartera Digital</h4><p>Software o hardware que almacena las claves privadas necesarias para acceder y gestionar criptomonedas. No almacena las monedas en sí, sino las claves de acceso a ellas en la blockchain.</p></div>
+
+    <div class="glosario-item"><h4>CONTRATO INTELIGENTE</h4><p>Programa almacenado en la blockchain que se ejecuta automáticamente cuando se cumplen condiciones predefinidas. No requiere intermediarios y su código es transparente y auditable.</p></div>
+
+    <div class="glosario-item"><h4>PROOF OF WORK (PoW)</h4><p>Mecanismo de consenso en el que los mineros compiten resolviendo problemas matemáticos para añadir bloques a la cadena. Consume mucha energía pero es el más probado en seguridad. Lo usa Bitcoin.</p></div>
+
+    <div class="glosario-item"><h4>PROOF OF STAKE (PoS)</h4><p>Mecanismo de consenso alternativo donde los validadores bloquean tokens como garantía para participar en la validación. Consume mucha menos energía que PoW. Lo usan Ethereum, Cardano y Solana.</p></div>
+
+    <div class="glosario-item"><h4>STAKING</h4><p>Proceso de bloquear criptomonedas para participar en la validación de una red PoS. A cambio, los participantes reciben recompensas periódicas, similar a un interés bancario pero sin banco.</p></div>
+
+    <div class="glosario-item"><h4>GAS</h4><p>Unidad que mide el coste computacional de ejecutar operaciones en Ethereum. Se paga en ETH. En momentos de alta demanda las comisiones de gas pueden ser muy elevadas.</p></div>
+
+    <div class="glosario-item"><h4>ALTCOIN</h4><p>Cualquier criptomoneda que no sea Bitcoin. El término viene de "alternative coin". Incluye desde proyectos sólidos como Ethereum hasta memecoins sin utilidad real.</p></div>
+
+    <div class="glosario-item"><h4>HALVING</h4><p>Evento programado en Bitcoin que reduce a la mitad la recompensa por minar un bloque. Ocurre cada ~4 años. Históricamente ha coincidido con periodos de subida de precio al reducir la emisión nueva.</p></div>
+
+    <div class="glosario-item"><h4>MEMPOOL</h4><p>Zona de espera donde las transacciones pendientes de confirmación quedan almacenadas antes de ser incluidas en un bloque. En momentos de congestión puede haber miles de transacciones esperando.</p></div>
+
+    <div class="glosario-item"><h4>FORK</h4><p>División del protocolo de una blockchain. Un soft fork es compatible con versiones anteriores. Un hard fork crea una cadena completamente nueva. Bitcoin Cash surgió de un hard fork de Bitcoin en 2017.</p></div>
+  </div>
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+<!-- NOTICIAS -->
+<section id="noticias" class="pantalla seccion defi-detalle">
+  <a href="defi.html" class="defi-volver">⬅ Volver</a>
+  <h2 style="margin-bottom:16px; letter-spacing:3px; text-shadow:0 0 8px #00ff66;">📰 NOTICIAS CRYPTO</h2>
+  <p style="color:#66ffb3; font-size:0.78rem; letter-spacing:2px; margin-bottom:20px;">// Últimas novedades del mercado — actualizado manualmente</p>
+
+  <div class="noticia">
+    <div class="noticia-meta"><span class="tag">MERCADO</span> 2025-03-10</div>
+    <h4>Bitcoin supera los 85.000$ tras la aprobación de nuevos ETFs en Europa</h4>
+    <p>El mercado crypto reacciona positivamente a la aprobación regulatoria de varios fondos cotizados de Bitcoin en mercados europeos. Los analistas apuntan a una mayor adopción institucional como catalizador del movimiento.</p>
+  </div>
+
+  <div class="noticia">
+    <div class="noticia-meta"><span class="tag">ETHEREUM</span> 2025-03-05</div>
+    <h4>Ethereum consolida su transición a Proof of Stake: dos años después de The Merge</h4>
+    <p>Dos años después de The Merge, Ethereum ha reducido su emisión neta de tokens en más de un 80% respecto al modelo anterior de minería. La red procesa actualmente más de un millón de transacciones diarias.</p>
+  </div>
+
+  <div class="noticia">
+    <div class="noticia-meta"><span class="tag">REGULACIÓN</span> 2025-02-28</div>
+    <h4>La Unión Europea activa MiCA: el primer marco regulatorio crypto completo del mundo</h4>
+    <p>El reglamento MiCA (Markets in Crypto-Assets) entra en plena vigencia, exigiendo a exchanges y emisores de tokens operar con licencia en la UE. Es el primer intento global de regular el sector de forma integral.</p>
+  </div>
+
+  <div class="noticia">
+    <div class="noticia-meta"><span class="tag">DEFI</span> 2025-02-20</div>
+    <h4>El volumen total bloqueado en DeFi supera los 200.000 millones de dólares</h4>
+    <p>El TVL (Total Value Locked) del ecosistema DeFi alcanza un nuevo máximo histórico impulsado por el crecimiento de protocolos de lending y staking líquido en Ethereum y Solana.</p>
+  </div>
+
+  <div class="noticia">
+    <div class="noticia-meta"><span class="tag">SOLANA</span> 2025-02-15</div>
+    <h4>Solana procesa un nuevo récord de transacciones diarias superando los 100 millones</h4>
+    <p>La red de Solana bate su propio récord de actividad diaria, consolidándose como la blockchain más activa por número de transacciones. El crecimiento se atribuye principalmente a su ecosistema de memecoins y aplicaciones de gaming.</p>
+  </div>
+
+  <nav class="nav-pie">
+    <a href="defi.html">💰 DeFi</a>
+    <a href="index.html">🏠 Inicio</a>
+    <a href="articulos.html">📚 Artículos</a>
+  </nav>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     VISTA PRINCIPAL
+     ══════════════════════════════════════ -->
+<section id="defi-main" class="pantalla seccion activa defi-main">
+
+  <div class="defi-header">
+    <h1>💰 DeFi TERMINAL</h1>
+    <p>// MERCADOS CRYPTO — PRECIOS EN TIEMPO REAL</p>
+  </div>
+
+  <div class="defi-tabs">
+    <a href="#defi-main" class="defi-tab activo">📊 MERCADO</a>
+    <a href="#glosario" class="defi-tab">📖 GLOSARIO</a>
+    <a href="#noticias" class="defi-tab">📰 NOTICIAS</a>
+  </div>
+
+  <div class="precios-wrap">
+    <table class="precios-tabla">
+      <thead>
+        <tr>
+          <th style="text-align:left;">#&nbsp;&nbsp;MONEDA</th>
+          <th>PRECIO</th>
+          <th>24H %</th>
+          <th>7D %</th>
+          <th>CAP. MERCADO</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tbody-precios">
+        <tr><td colspan="6" id="cargando-precios">Conectando con CoinGecko...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="defi-footer">
+    <a href="index.html">⬅ Volver al HUB</a><br><br>
+    <a href="articulos.html">📚 Artículos</a> · <a href="gaming.html">🎮 Gaming</a> · <a href="red.html">🌐 Red</a><br><br>
+    Datos: CoinGecko API · RETROTERM.AI v0.1 © 2025
+  </div>
+
+</section>
+
+
+<script>
+// ═══════════════════════════════════════════
+// MONEDAS — IDs de CoinGecko
+// ═══════════════════════════════════════════
+var MONEDAS = [
+  { id: 'bitcoin',      sym: 'BTC', nombre: 'Bitcoin' },
+  { id: 'ethereum',     sym: 'ETH', nombre: 'Ethereum' },
+  { id: 'solana',       sym: 'SOL', nombre: 'Solana' },
+  { id: 'binancecoin',  sym: 'BNB', nombre: 'BNB' },
+  { id: 'ripple',       sym: 'XRP', nombre: 'XRP' },
+  { id: 'dogecoin',     sym: 'DOGE', nombre: 'Dogecoin' },
+  { id: 'cardano',      sym: 'ADA', nombre: 'Cardano' },
+  { id: 'avalanche-2',  sym: 'AVAX', nombre: 'Avalanche' },
+  { id: 'chainlink',    sym: 'LINK', nombre: 'Chainlink' },
+  { id: 'polkadot',     sym: 'DOT', nombre: 'Polkadot' },
+  { id: 'uniswap',      sym: 'UNI', nombre: 'Uniswap' },
+  { id: 'litecoin',     sym: 'LTC', nombre: 'Litecoin' }
+];
+
+// ═══════════════════════════════════════════
+// CARGAR TABLA DE PRECIOS
+// ═══════════════════════════════════════════
+function cargarPrecios() {
+  var ids = MONEDAS.map(function(m) { return m.id; }).join(',');
+  fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + ids + '&order=market_cap_desc&per_page=12&page=1&sparkline=false&price_change_percentage=24h,7d')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var tbody = document.getElementById('tbody-precios');
+      tbody.innerHTML = '';
+      data.forEach(function(coin, i) {
+        var c24 = coin.price_change_percentage_24h || 0;
+        var c7  = coin.price_change_percentage_7d_in_currency || 0;
+        var fmtPrecio = coin.current_price >= 1
+          ? '$' + coin.current_price.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+          : '$' + coin.current_price.toFixed(4);
+        var fmtCap = '$' + (coin.market_cap / 1e9).toFixed(1) + 'B';
+        var cls24 = c24 >= 0 ? 'subida' : 'bajada';
+        var cls7  = c7  >= 0 ? 'subida' : 'bajada';
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td><img src="' + coin.image + '" alt="' + coin.symbol + '" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"><span class="coin-nombre">' + coin.symbol.toUpperCase() + '</span><span class="coin-sym">' + coin.name + '</span></td>' +
+          '<td>' + fmtPrecio + '</td>' +
+          '<td class="' + cls24 + '">' + (c24 >= 0 ? '+' : '') + c24.toFixed(2) + '%</td>' +
+          '<td class="' + cls7 + '">' + (c7 >= 0 ? '+' : '') + c7.toFixed(2) + '%</td>' +
+          '<td>' + fmtCap + '</td>' +
+          '<td><a href="#' + coin.id + '" class="ver-btn">▶ VER</a></td>';
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(function() {
+      document.getElementById('cargando-precios').textContent = 'Error al conectar con CoinGecko.';
+    });
+}
+
+// ═══════════════════════════════════════════
+// CARGAR GRÁFICA DE UNA MONEDA
+// ═══════════════════════════════════════════
+function cargarGrafica(id) {
+  var loading = document.getElementById('loading-' + id);
+  var canvas  = document.getElementById('canvas-' + id);
+  if (!canvas || canvas.dataset.cargado) return;
+
+  fetch('https://api.coingecko.com/api/v3/coins/' + id + '/market_chart?vs_currency=usd&days=7&interval=daily')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var precios = data.prices.map(function(p) { return p[1]; });
+      var actual  = precios[precios.length - 1];
+      var cambio  = ((actual - precios[0]) / precios[0] * 100).toFixed(2);
+
+      // Actualizar precio y cambio
+      var elPrecio  = document.getElementById('precio-' + id);
+      var elCambio  = document.getElementById('cambio-' + id);
+      if (elPrecio) elPrecio.textContent = actual >= 1
+        ? '$' + actual.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+        : '$' + actual.toFixed(4);
+      if (elCambio) {
+        elCambio.textContent = (cambio >= 0 ? '▲ +' : '▼ ') + cambio + '% últimos 7 días';
+        elCambio.className = 'precio-cambio ' + (cambio >= 0 ? 'subida' : 'bajada');
+      }
+
+      // Dibujar gráfica con Canvas
+      if (loading) loading.style.display = 'none';
+      canvas.style.display = 'block';
+      var ctx = canvas.getContext('2d');
+      var w = canvas.offsetWidth || 800;
+      var h = canvas.offsetHeight || 160;
+      canvas.width  = w;
+      canvas.height = h;
+
+      var min = Math.min.apply(null, precios);
+      var max = Math.max.apply(null, precios);
+      var rango = max - min || 1;
+      var pad = 20;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Líneas de cuadrícula
+      ctx.strokeStyle = '#0a1a0a';
+      ctx.lineWidth = 1;
+      for (var g = 0; g <= 4; g++) {
+        var gy = pad + (h - pad * 2) * g / 4;
+        ctx.beginPath();
+        ctx.moveTo(0, gy);
+        ctx.lineTo(w, gy);
+        ctx.stroke();
+      }
+
+      // Área rellena bajo la línea
+      var color = cambio >= 0 ? '#00ff66' : '#ff5555';
+      ctx.beginPath();
+      precios.forEach(function(p, i) {
+        var x = pad + (w - pad * 2) * i / (precios.length - 1);
+        var y = pad + (h - pad * 2) * (1 - (p - min) / rango);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+      ctx.lineTo(pad + (w - pad * 2), h);
+      ctx.lineTo(pad, h);
+      ctx.closePath();
+      ctx.fillStyle = cambio >= 0 ? 'rgba(0,255,102,0.06)' : 'rgba(255,85,85,0.06)';
+      ctx.fill();
+
+      // Línea principal
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      precios.forEach(function(p, i) {
+        var x = pad + (w - pad * 2) * i / (precios.length - 1);
+        var y = pad + (h - pad * 2) * (1 - (p - min) / rango);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      // Puntos
+      ctx.fillStyle = color;
+      precios.forEach(function(p, i) {
+        var x = pad + (w - pad * 2) * i / (precios.length - 1);
+        var y = pad + (h - pad * 2) * (1 - (p - min) / rango);
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      canvas.dataset.cargado = '1';
+    })
+    .catch(function() {
+      if (loading) loading.textContent = 'Error al cargar datos.';
+    });
+}
+
+// ═══════════════════════════════════════════
+// DETECTAR HASH Y LANZAR FETCH CORRECTO
+// ═══════════════════════════════════════════
+function onHash() {
+  var hash = location.hash.replace('#', '');
+  var ids = MONEDAS.map(function(m) { return m.id; });
+  if (ids.indexOf(hash) !== -1) {
+    cargarGrafica(hash);
+  }
+}
+
+window.addEventListener('load', function() {
+  cargarPrecios();
+  onHash();
+});
+window.addEventListener('hashchange', onHash);
+</script>
+
+</body>
+</html>

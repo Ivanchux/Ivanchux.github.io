@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comandos Linux para administradores - Artículos - RETROTERM.AI</title>
+  <meta name="description" content="Los comandos Linux más usados en administración de sistemas ASIR: gestión de archivos, procesos y red. Guía práctica para exámenes y el mundo real.">
+  <link rel="canonical" href="https://ivanchux.github.io/articulo-linux.html">
+  <link rel="stylesheet" href="estilos.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- JSON-LD: Datos estructurados del artículo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Comandos Linux que todo administrador de sistemas debe saber",
+    "description": "Los comandos Linux más usados en administración de sistemas ASIR: gestión de archivos, procesos y red.",
+    "author": {
+      "@type": "Person",
+      "name": "Iván Brihuega Crespo"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "RETROTERM.AI",
+      "url": "https://ivanchux.github.io/"
+    },
+    "datePublished": "2025-02-15",
+    "dateModified": "2025-02-15",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://ivanchux.github.io/articulo-linux.html"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://ivanchux.github.io/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Artículos",
+        "item": "https://ivanchux.github.io/articulos.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Comandos Linux que todo administrador de sistemas debe saber",
+        "item": "https://ivanchux.github.io/articulo-linux.html"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <section class="pantalla seccion activa">
+
+    <nav class="breadcrumbs" aria-label="Ruta de navegación">
+      <a href="index.html">INICIO</a>
+      <span class="bread-sep">&gt;</span>
+      <a href="articulos.html">ARTÍCULOS</a>
+      <span class="bread-sep">&gt;</span>
+      <span class="bread-current">COMANDOS LINUX</span>
+    </nav>
+
+    <header class="cabecera">
+      <h1>🖥️ ARTÍCULO</h1>
+      <p class="subtitulo">Comandos Linux que todo administrador de sistemas debe saber</p>
+    </header>
+
+    <article class="articulo articulo-completo">
+
+      <p class="articulo-meta"><span class="articulo-tag">SISTEMAS</span> // 2025-02-15 — Iván Brihuega</p>
+
+      <p>En ASIR, Linux es prácticamente el pan de cada día. Aquí van los comandos más usados en administración de sistemas, los que aparecen en los exámenes y los que usarás en el mundo real.</p>
+
+      <h4>Gestión de archivos y directorios</h4>
+      <div class="codigo-bloque">ls -la         # listar con permisos
+cd /ruta       # cambiar directorio
+mkdir carpeta  # crear directorio
+rm -rf carpeta # eliminar recursivo (¡cuidado!)
+cp origen dest # copiar
+mv origen dest # mover o renombrar</div>
+
+      <h4>Gestión de procesos</h4>
+      <div class="codigo-bloque">ps aux         # listar procesos
+kill -9 PID    # matar proceso por ID
+top            # monitor en tiempo real
+htop           # monitor mejorado (si está instalado)</div>
+
+      <h4>Red</h4>
+      <div class="codigo-bloque">ip a           # ver interfaces de red
+ping 8.8.8.8   # comprobar conectividad
+netstat -tuln  # puertos abiertos
+ss -tulnp      # alternativa moderna a netstat</div>
+
+      <h4>Gestión de usuarios y permisos</h4>
+      <div class="codigo-bloque">whoami         # usuario actual
+id             # UID, GID y grupos
+sudo comando   # ejecutar como root
+chmod 755 f    # cambiar permisos
+chown user f   # cambiar propietario
+passwd         # cambiar contraseña</div>
+
+      <h4>Servicios y sistema</h4>
+      <div class="codigo-bloque">systemctl start servicio   # iniciar servicio
+systemctl stop servicio    # detener servicio
+systemctl status servicio  # ver estado
+systemctl enable servicio  # activar al arranque
+journalctl -xe             # ver logs del sistema</div>
+
+      <p>Dominar estos comandos te da una base sólida para cualquier práctica de ASIR, desde configurar servidores hasta gestionar redes en entornos reales.</p>
+
+    </article>
+
+    <div class="nav-inferior">
+      <a href="articulos.html" class="volver">⬅ Volver a Artículos</a>
+      <a href="index.html" class="volver">🏠 Volver al HUB</a>
+      <a href="articulo-retroterm.html" class="volver">🚀 RETROTERM.AI</a>
+      <a href="articulo-seo.html" class="volver">🔧 SEO Técnico</a>
+    </div>
+
+    <nav class="nav-pie" aria-label="Navegación secundaria">
+      <a href="index.html">🏠 Inicio</a>
+      <a href="articulos.html">📚 Artículos</a>
+      <a href="editor.html">💻 Editor</a>
+      <a href="red.html">🌐 Red</a>
+    </nav>
+
+    <footer class="pie">
+      <p>RETROTERM.AI v0.1 © 2025 | Iván Brihuega Crespo</p>
+    </footer>
+
+  </section>
+
+</body>
+</html>
