@@ -15,15 +15,27 @@
 
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "La evolución retrofuturista de RETROTERM.AI",
-    "author": { "@type": "Person", "name": "Iván Brihuega Crespo" },
-    "publisher": { "@type": "Organization", "name": "RETROTERM.AI", "url": "https://ivanchux.github.io/" },
-    "datePublished": "2025-01-01",
-    "dateModified": "2025-03-01",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ivanchux.github.io/articulos.html" }
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "La evolución retrofuturista de RETROTERM.AI",
+  "image": "https://ivanchux.github.io/Imagenes/retroterm_ai.jpg",
+  "author": {
+    "@type": "Person",
+    "name": "Iván Brihuega Crespo",
+    "url": "https://ivanchux.github.io/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "RETROTERM.AI",
+    "url": "https://ivanchux.github.io/"
+  },
+  "datePublished": "2025-09-01T00:00:00+00:00",
+  "dateModified": "2025-09-02T00:00:00+00:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ivanchux.github.io/articulos.html"
   }
+}
   </script>
 
   <style>
@@ -104,16 +116,30 @@
       user-select: none;
       transition: color 0.15s;
     }
-    .art-cat-titulo:hover { color: #00ff66; }
-    .art-cat-titulo.abierta { color: #00ff66; }
-    .art-cat-flecha { font-size: 0.6rem; transition: transform 0.2s; }
-    .art-cat-titulo.abierta .art-cat-flecha { transform: rotate(90deg); }
+    .art-cat-titulo:hover{
+      color: #00ff66; 
+    }
+
+    .art-cat-titulo.abierta{
+      color: #00ff66; 
+    }
+    
+    .art-cat-flecha{ 
+      font-size: 0.6rem; 
+      transition: transform 0.2s; 
+    }
+    
+    .art-cat-titulo.abierta .art-cat-flecha{ 
+      transform: rotate(90deg); 
+    }
     .art-cat-lista {
       display: none;
       padding: 0 0 6px;
     }
-    .art-cat-lista.visible { display: block; }
-    .art-cat-enlace {
+    .art-cat-lista.visible{ 
+      display: block; 
+    }
+    .art-cat-enlace{
       display: block;
       padding: 5px 12px 5px 20px;
       color: #ffffff;
@@ -122,8 +148,7 @@
       transition: all 0.15s;
       border-left: 2px solid transparent;
     }
-    .art-cat-enlace:hover,
-    .art-cat-enlace.activo {
+    .art-cat-enlace:hover,.art-cat-enlace.activo {
       color: #00ff66;
       border-left-color: #00ff66;
       background: rgba(0,255,102,0.04);
@@ -194,9 +219,24 @@
       padding: 1px 6px;
       align-self: flex-start;
     }
-    .tarjeta h3 { font-size: 0.82rem; color: #66ffb3; margin: 0; line-height: 1.4; }
-    .tarjeta p  { font-size: 0.76rem; color: #999; margin: 0; line-height: 1.5; flex: 1; }
-    .tarjeta-fecha { font-size: 0.62rem; color: #00ff6633; letter-spacing: 1px; }
+    .tarjeta h3{ 
+      font-size: 0.82rem; 
+      color: #66ffb3; 
+      margin: 0; 
+      line-height: 1.4; 
+    }
+    .tarjeta p{ 
+      font-size: 0.76rem; 
+      color: #999; 
+      margin: 0; 
+      line-height: 1.5; 
+      flex: 1; 
+    }
+    .tarjeta-fecha{ 
+      font-size: 0.62rem; 
+      color: #00ff6633; 
+      letter-spacing: 1px; 
+    }
     .tarjeta-link {
       font-size: 0.72rem;
       color: #00ff66;
@@ -208,7 +248,10 @@
       letter-spacing: 1px;
       margin-top: 4px;
     }
-    .tarjeta-link:hover { background: #00ff66; color: #000; }
+    .tarjeta-link:hover{ 
+      background: #00ff66; 
+      color: #000; 
+    }
 
     #sin-resultados {
       display: none;
@@ -232,7 +275,11 @@
       letter-spacing: 1px;
       transition: all 0.2s;
     }
-    .btn-leer:hover { background: #00ff66; color: #000; box-shadow: 0 0 10px #00ff66; }
+    .btn-leer:hover{ 
+      background: #00ff66; 
+      color: #000; 
+      box-shadow: 0 0 10px #00ff66; 
+    }
 
     /* Volver */
     .volver-hub {
@@ -247,20 +294,38 @@
       letter-spacing: 1px;
       transition: 0.2s;
     }
-    .volver-hub:hover { background: #00ff66; color: #000; }
+    .volver-hub:hover{ 
+      background: #00ff66; 
+      color: #000; 
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 480px) {
-      .art-layout {
+      .art-layout{
         grid-template-columns: 1fr;
       }
-      .art-sidebar {
+      .art-sidebar{
         position: static;
       }
-      .art-hero { height: 110px; }
-      .art-hero-overlay h1 { font-size: 1.1rem; }
-      .art-grid { grid-template-columns: 1fr; }
+      .art-hero{ 
+        height: 110px; 
+      }
+      .art-hero-overlay h1{ 
+        font-size: 1.1rem; 
+      }
+      .art-grid{ 
+        grid-template-columns: 1fr; 
+      }
     }
+
+    .pantalla{ 
+      display: block !important; 
+    }
+    
+    .seccion{ 
+      opacity: 1 !important; 
+    }
+
   </style>
 </head>
 <body>
@@ -269,7 +334,7 @@
 
   <!-- CABECERA CON VÍDEO -->
   <div class="art-hero">
-    <video src="Videos/articulos_principal.mp4" autoplay muted loop playsinline></video>
+    <video src="Videos/articulos_principal.mp4" autoplay muted loop playsinline preload="none">
     <div class="art-hero-overlay">
       <h1>📚 ARTÍCULOS</h1>
       <p>// Apuntes, guías y notas técnicas</p>
@@ -348,7 +413,7 @@
       <!-- ARTÍCULO DESTACADO -->
       <div class="art-destacado">
         <span class="art-destacado-tag">PROYECTO</span>
-        <div class="art-destacado-meta">// 2025-01-01 — Iván Brihuega</div>
+        <div class="art-destacado-meta">// 2025-10-08 — Iván Brihuega</div>
         <h2>🚀 La evolución retrofuturista de RETROTERM.AI</h2>
         <p>RETROTERM.AI nació de querer hacer algo diferente. Mezclando la estética de terminales de los años 80 con funcionalidades modernas: editor de código, asistente IA, red de proyectos y mucho más. Todavía en desarrollo, pero con una identidad visual muy clara.</p>
         <a href="articulo-retroterm.html" class="btn-leer">📖 LEER ARTÍCULO →</a>
@@ -361,7 +426,7 @@
           <span class="tarjeta-cat">LINUX</span>
           <h3>🖥️ Comandos Linux que todo administrador debe saber</h3>
           <p>Archivos, procesos, red, usuarios y servicios. Los comandos que aparecen en los exámenes y en el mundo real.</p>
-          <span class="tarjeta-fecha">// 2025-02-15</span>
+          <span class="tarjeta-fecha">// 2025-10-26</span>
           <a href="articulo-linux.html" class="tarjeta-link">LEER →</a>
         </div>
 
@@ -369,7 +434,7 @@
           <span class="tarjeta-cat">WEB / SEO</span>
           <h3>🔧 Qué es el SEO técnico y por qué importa en ASIR</h3>
           <p>robots.txt, sitemap.xml, meta canonical, Open Graph y Schema.org con ejemplos reales.</p>
-          <span class="tarjeta-fecha">// 2025-03-01</span>
+          <span class="tarjeta-fecha">// 2025-11-06</span>
           <a href="articulo-seo.html" class="tarjeta-link">LEER →</a>
         </div>
 
@@ -377,7 +442,7 @@
           <span class="tarjeta-cat">BASES DE DATOS</span>
           <h3>🗄️ SQL — Guía de Bases de Datos</h3>
           <p>DDL, DML, DCL, SELECT, JOINs, funciones y trucos de examen para ASIR.</p>
-          <span class="tarjeta-fecha">// 2025-03-01</span>
+          <span class="tarjeta-fecha">// 2026-01-25</span>
           <a href="articulo-sql.html" class="tarjeta-link">LEER →</a>
         </div>
 
@@ -385,7 +450,7 @@
           <span class="tarjeta-cat">BASES DE DATOS</span>
           <h3>📋 SQL — Plantillas de consultas</h3>
           <p>Consultas habituales listas para copiar: WHERE, JOIN, GROUP BY, subconsultas y fechas.</p>
-          <span class="tarjeta-fecha">// 2025-03-01</span>
+          <span class="tarjeta-fecha">// 2026-02-05</span>
           <a href="articulo-sql-plantillas.html" class="tarjeta-link">LEER →</a>
         </div>
 
@@ -393,11 +458,11 @@
           <span class="tarjeta-cat">BASES DE DATOS</span>
           <h3>📝 SQL — Ejercicios resueltos</h3>
           <p>15 ejercicios resueltos sobre dos bases de datos: tienda con productos y empresa con empleados.</p>
-          <span class="tarjeta-fecha">// 2025-03-01</span>
+          <span class="tarjeta-fecha">// 2026-02-12</span>
           <a href="articulo-sql-ejercicios.html" class="tarjeta-link">LEER →</a>
         </div>
 
-        <!-- 
+        <!-- Para añadir un artículo nuevo, copia este bloque:
 
         <div class="tarjeta" data-cat="bbdd">
           <span class="tarjeta-cat">BASES DE DATOS</span>
@@ -426,7 +491,7 @@
   </nav>
 
   <footer class="pie">
-    <p>RETROTERM.AI v0.1 © 2025 | Iván Brihuega Crespo</p>
+    <p>RETROTERM.AI v0.2 © 2025 | Iván Brihuega Crespo</p>
   </footer>
 
 </section>
