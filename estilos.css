@@ -10,7 +10,6 @@ body {
   scroll-behavior: smooth;
 }
 
-
 .pantalla {
   width: 90%;
   max-width: 900px;
@@ -22,6 +21,10 @@ body {
   display: none; 
 }
 
+.pantalla-wide {
+  max-width: 1400px;
+  width: 95%;
+}
 
 .activa,
 :target {
@@ -40,7 +43,6 @@ h1 {
   color: #66ffb3;
   font-size: 0.9rem;
 }
-
 
 .menu {
   display: flex;
