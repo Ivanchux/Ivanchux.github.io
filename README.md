@@ -40,6 +40,9 @@ Una plataforma web con estética de terminal retro que funciona como HUB central
 ├── articulo-linux.html     → Artículo: comandos Linux
 ├── articulo-retroterm.html → Artículo: sobre el proyecto
 ├── articulo-seo.html       → Artículo: SEO técnico
+├── articulo-sql.html       → Artículo: Repaso de SQL
+├── articulo-sql-ejercicios.html       → Artículo: Ejercicios de SQL
+├── articulo-sql-plantillas.html       → Artículo: Plantillas de SQL
 ├── gaming.html             → Sección gaming
 ├── defi.html               → Terminal DeFi
 ├── red.html                → Red de proyectos
