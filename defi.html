@@ -53,8 +53,12 @@
     }
 
     /* ══ VISTAS DETALLE ocultas por defecto ══ */
-    .defi-detalle { display: none; }
-    .defi-detalle:target { display: block; }
+    .defi-detalle{ 
+      display: none; 
+    }
+    .defi-detalle:target { 
+      display: block; 
+    }
 
     /* ══ TABS DE NAVEGACIÓN ══ */
     .defi-tabs {
@@ -76,6 +80,7 @@
       letter-spacing: 2px;
       transition: 0.2s;
     }
+
     .defi-tab:hover, .defi-tab.activo {
       color: #00ff66;
       background: rgba(0, 30, 0, 0.8);
@@ -83,12 +88,16 @@
     }
 
     /* ══ TABLA DE PRECIOS ══ */
-    .precios-wrap { overflow-x: auto; }
+    .precios-wrap{ 
+      overflow-x: auto; 
+    }
+    
     .precios-tabla {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.82rem;
     }
+
     .precios-tabla th {
       color: #1a4a2a;
       font-size: 0.65rem;
@@ -97,19 +106,42 @@
       text-align: right;
       border-bottom: 1px solid #003300;
     }
-    .precios-tabla th:first-child { text-align: left; }
-    .precios-tabla td {
+    .precios-tabla th:first-child{ 
+      text-align: left; 
+    }
+
+    .precios-tabla td{
       padding: 10px 12px;
       text-align: right;
       border-bottom: 1px solid #030f03;
       color: #ccc;
     }
-    .precios-tabla td:first-child { text-align: left; }
-    .precios-tabla tr:hover td { background: rgba(0, 255, 102, 0.03); }
-    .coin-nombre { color: #00ff66; font-weight: bold; letter-spacing: 1px; }
-    .coin-sym { color: #1a4a2a; font-size: 0.7rem; margin-left: 6px; }
-    .subida { color: #00ff66; }
-    .bajada { color: #ff5555; }
+    .precios-tabla td:first-child{ 
+      text-align: left; 
+    }
+    .precios-tabla tr:hover td{ 
+      background: rgba(0, 255, 102, 0.03); 
+    }
+    .coin-nombre{ 
+      color: #00ff66; 
+      font-weight: bold; 
+      letter-spacing: 1px; 
+    }
+
+    .coin-sym{ 
+      color: #1a4a2a; 
+      font-size: 0.7rem; 
+      margin-left: 6px; 
+    }
+
+    .subida{ 
+      color: #00ff66; 
+    }
+
+    .bajada{ 
+      color: #ff5555; 
+    }
+
     .ver-btn {
       font-size: 0.65rem;
       color: #00ff66;
@@ -119,21 +151,47 @@
       letter-spacing: 1px;
       transition: 0.2s;
     }
-    .ver-btn:hover { background: #00ff66; color: #000; }
-    #cargando-precios { text-align: center; padding: 30px; color: #1a4a2a; font-size: 0.8rem; letter-spacing: 2px; }
+    .ver-btn:hover{ 
+      background: #00ff66; 
+      color: #000; 
+    }
+
+    #cargando-precios{ 
+      text-align: center; 
+      padding: 30px; 
+      color: #1a4a2a; 
+      font-size: 0.8rem; 
+      letter-spacing: 2px; 
+    }
 
     /* ══ DETALLE MONEDA ══ */
-    .detalle-moneda-header { margin-bottom: 16px; }
-    .detalle-moneda-header h2 { font-size: 1.3rem; letter-spacing: 3px; text-shadow: 0 0 8px #00ff66; }
-    .detalle-moneda-header p { color: #66ffb3; font-size: 0.75rem; letter-spacing: 2px; margin-top: 4px; }
-    .precio-actual {
+    .detalle-moneda-header{ 
+      margin-bottom: 16px;
+    }
+    .detalle-moneda-header h2{ 
+      font-size: 1.3rem; 
+      letter-spacing: 3px; 
+      text-shadow: 0 0 8px #00ff66; 
+    }
+
+    .detalle-moneda-header p{ 
+      color: #66ffb3; 
+      font-size: 0.75rem; 
+      letter-spacing: 2px; 
+      margin-top: 4px; 
+    }
+
+    .precio-actual{
       font-size: 1.8rem;
       color: #00ff66;
       text-shadow: 0 0 10px #00ff66;
       margin: 16px 0 4px 0;
       letter-spacing: 2px;
     }
-    .precio-cambio { font-size: 0.85rem; margin-bottom: 20px; }
+    .precio-cambio{ 
+      font-size: 0.85rem; 
+      margin-bottom: 20px;
+    }
 
     /* ══ GRÁFICA CANVAS ══ */
     .grafica-wrap {
@@ -175,7 +233,10 @@
       color: #66ffb3;
       letter-spacing: 1px;
     }
-    .dato span { color: #aaa; }
+    .dato span{ 
+      color: #aaa; 
+    }
+
     .detalle-desc {
       font-size: 0.85rem;
       color: #ccc;
@@ -184,7 +245,10 @@
     }
 
     /* ══ GLOSARIO ══ */
-    .glosario-lista { margin-top: 10px; }
+    .glosario-lista{
+       margin-top: 10px; 
+      }
+
     .glosario-item {
       border-left: 2px solid #003300;
       padding: 10px 16px;
@@ -229,7 +293,11 @@
       margin-bottom: 8px;
       letter-spacing: 1px;
     }
-    .noticia p { color: #aaa; font-size: 0.8rem; line-height: 1.7; }
+    .noticia p{ 
+      color: #aaa; 
+      font-size: 0.8rem; 
+      line-height: 1.7; 
+    }
 
     /* ══ VOLVER ══ */
     .defi-volver {
@@ -243,7 +311,10 @@
       letter-spacing: 1px;
       transition: 0.2s;
     }
-    .defi-volver:hover { background: #00ff66; color: #000; }
+    .defi-volver:hover{ 
+      background: #00ff66; 
+      color: #000; 
+    }
 
     /* ══ FOOTER ══ */
     .defi-footer {
@@ -255,15 +326,34 @@
       color: #1a4a2a;
       line-height: 2;
     }
-    .defi-footer a { color: #00ff66; text-decoration: none; }
-    .defi-footer a:hover { color: #66ffb3; }
+
+    .defi-footer a{ 
+      color: #00ff66; 
+      text-decoration: none; 
+    }
+
+    .defi-footer a:hover{ 
+      color: #66ffb3; 
+    }
 
     /* ══ RESPONSIVE ══ */
-    @media (max-width: 480px) {
-      .defi-header h1 { font-size: 1.3rem; letter-spacing: 2px; }
-      .precios-tabla { font-size: 0.72rem; }
-      .precio-actual { font-size: 1.3rem; }
+    @media (max-width: 480px){
+      .defi-header h1{ 
+        font-size: 1.3rem; 
+        letter-spacing: 2px; 
+      }
+      .precios-tabla{ 
+        font-size: 0.72rem; 
+      }
+      .precio-actual{ 
+        font-size: 1.3rem; 
+      }
     }
+
+    .activa{ 
+      display: block !important; 
+      opacity: 1 !important; }
+
   </style>
 </head>
 <body>
@@ -652,31 +742,31 @@
   <p style="color:#66ffb3; font-size:0.78rem; letter-spacing:2px; margin-bottom:20px;">// Últimas novedades del mercado — actualizado manualmente</p>
 
   <div class="noticia">
-    <div class="noticia-meta"><span class="tag">MERCADO</span> 2025-03-10</div>
+    <div class="noticia-meta"><span class="tag">MERCADO</span> 2025-10-10</div>
     <h4>Bitcoin supera los 85.000$ tras la aprobación de nuevos ETFs en Europa</h4>
     <p>El mercado crypto reacciona positivamente a la aprobación regulatoria de varios fondos cotizados de Bitcoin en mercados europeos. Los analistas apuntan a una mayor adopción institucional como catalizador del movimiento.</p>
   </div>
 
   <div class="noticia">
-    <div class="noticia-meta"><span class="tag">ETHEREUM</span> 2025-03-05</div>
+    <div class="noticia-meta"><span class="tag">ETHEREUM</span> 2025-10-30</div>
     <h4>Ethereum consolida su transición a Proof of Stake: dos años después de The Merge</h4>
     <p>Dos años después de The Merge, Ethereum ha reducido su emisión neta de tokens en más de un 80% respecto al modelo anterior de minería. La red procesa actualmente más de un millón de transacciones diarias.</p>
   </div>
 
   <div class="noticia">
-    <div class="noticia-meta"><span class="tag">REGULACIÓN</span> 2025-02-28</div>
+    <div class="noticia-meta"><span class="tag">REGULACIÓN</span> 2026-02-12</div>
     <h4>La Unión Europea activa MiCA: el primer marco regulatorio crypto completo del mundo</h4>
     <p>El reglamento MiCA (Markets in Crypto-Assets) entra en plena vigencia, exigiendo a exchanges y emisores de tokens operar con licencia en la UE. Es el primer intento global de regular el sector de forma integral.</p>
   </div>
 
   <div class="noticia">
-    <div class="noticia-meta"><span class="tag">DEFI</span> 2025-02-20</div>
+    <div class="noticia-meta"><span class="tag">DEFI</span> 2026-02-20</div>
     <h4>El volumen total bloqueado en DeFi supera los 200.000 millones de dólares</h4>
     <p>El TVL (Total Value Locked) del ecosistema DeFi alcanza un nuevo máximo histórico impulsado por el crecimiento de protocolos de lending y staking líquido en Ethereum y Solana.</p>
   </div>
 
   <div class="noticia">
-    <div class="noticia-meta"><span class="tag">SOLANA</span> 2025-02-15</div>
+    <div class="noticia-meta"><span class="tag">SOLANA</span> 2026-03-15</div>
     <h4>Solana procesa un nuevo récord de transacciones diarias superando los 100 millones</h4>
     <p>La red de Solana bate su propio récord de actividad diaria, consolidándose como la blockchain más activa por número de transacciones. El crecimiento se atribuye principalmente a su ecosistema de memecoins y aplicaciones de gaming.</p>
   </div>
@@ -726,7 +816,7 @@
   <div class="defi-footer">
     <a href="index.html">⬅ Volver al HUB</a><br><br>
     <a href="articulos.html">📚 Artículos</a> · <a href="gaming.html">🎮 Gaming</a> · <a href="red.html">🌐 Red</a><br><br>
-    Datos: CoinGecko API · RETROTERM.AI v0.1 © 2025
+    Datos: CoinGecko API · RETROTERM.AI v0.2 © 2025
   </div>
 
 </section>
