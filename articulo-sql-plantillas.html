@@ -14,7 +14,7 @@
     "headline": "SQL — Plantillas de consultas habituales",
     "author": { "@type": "Person", "name": "Iván Brihuega Crespo" },
     "publisher": { "@type": "Organization", "name": "RETROTERM.AI", "url": "https://ivanchux.github.io/" },
-    "datePublished": "2025-03-01",
+    "datePublished": "2026-03-01",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ivanchux.github.io/articulo-sql-plantillas.html" }
   }
   </script>
@@ -30,43 +30,123 @@
   }
   </script>
   <style>
-    .breadcrumbs { font-size:.72rem; color:#00ff6655; margin-bottom:18px; letter-spacing:1px; }
-    .breadcrumbs a { color:#00ff6688; text-decoration:none; }
-    .breadcrumbs a:hover { color:#00ff66; }
-    .breadcrumbs span { color:#00ff6633; margin:0 6px; }
+    .breadcrumbs{ 
+      font-size:.72rem; 
+      color:#00ff6655; 
+      margin-bottom:18px; 
+      letter-spacing:1px; 
+    }
+    .breadcrumbs a{ 
+      color:#00ff6688; 
+      text-decoration:none; 
+    }
+    .breadcrumbs a:hover{ 
+      color:#00ff66; 
+    }
+    .breadcrumbs span{ 
+      color:#00ff6633; 
+      margin:0 6px; 
+    }
 
-    .bloque { border:1px solid #003300; background:rgba(0,20,0,0.6); margin:18px 0; overflow:hidden; }
+    .bloque{ 
+      border:1px solid #003300; 
+      background:rgba(0,20,0,0.6); 
+      margin:18px 0; 
+      overflow:hidden; 
+    }
     .bloque-titulo {
       padding:8px 14px; font-size:.72rem; letter-spacing:2px;
       border-bottom:1px solid #003300; color:#00ff66;
       background:rgba(0,255,102,0.04);
     }
-    .bloque-body { padding:14px; }
-
-    .etiqueta { font-size:0.70rem; color:#ffffff; letter-spacing:2px; margin:12px 0 4px; display:block; }
-
-    .codigo-bloque {
-      background:#000; border:1px solid #003300; border-left:2px solid #00ff6655;
-      padding:10px 14px; font-family:'Courier New',monospace; font-size:.82rem;
-      line-height:1.7; overflow-x:auto; white-space:pre; margin:8px 0; color:#00ff66;
+    .bloque-body{ 
+      padding:14px; 
     }
-    .kw  { color:#ff79c6; font-weight:bold; }
-    .fn  { color:#00ff66; }
-    .str { color:#f1fa8c; }
-    .num { color:#bd93f9; }
-    .cmt { color:#555; font-style:italic; }
-    .tbl { color:#4fc3ff; }
-    .op  { color:#ffb86c; }
 
-    .aviso { background:rgba(255,107,107,.06); border:1px solid rgba(255,107,107,.3); color:#ff6b6b; padding:6px 12px; font-size:.78rem; margin:8px 0; }
-    .ok-msg { background:rgba(0,255,102,.04); border:1px solid rgba(0,255,102,.2); color:#66ffb3; padding:6px 12px; font-size:.78rem; margin:8px 0; }
+    .etiqueta{ 
+      font-size:0.70rem; 
+      color:#ffffff; 
+      letter-spacing:2px; 
+      margin:12px 0 4px; 
+      display:block; 
+    }
 
-    .col2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:10px 0; }
+    .codigo-bloque{
+      background:#000; 
+      order:1px solid #003300; 
+      border-left:2px solid #00ff6655;
+      padding:10px 14px; 
+      font-family:'Courier New',monospace; 
+      font-size:.82rem;
+      line-height:1.7; 
+      overflow-x:auto; 
+      white-space:pre; 
+      margin:8px 0; 
+      color:#00ff66;
+    }
+
+    .kw{ 
+      color:#ff79c6; 
+      font-weight:bold; 
+    }
+    .fn{ 
+      color:#00ff66; 
+    }
+    .str{ 
+      color:#f1fa8c; 
+    }
+    .num{ 
+      color:#bd93f9; 
+    }
+    .cmt{ 
+      color:#555; 
+      font-style:italic; 
+    }
+    .tbl{ 
+      color:#4fc3ff; 
+    }
+    .op{ 
+      color:#ffb86c; 
+    }
+
+    .aviso{ 
+      background:rgba(255,107,107,.06); 
+      border:1px solid rgba(255,107,107,.3); 
+      color:#ff6b6b; 
+      padding:6px 12px; 
+      font-size:.78rem; 
+      margin:8px 0; 
+    }
+
+    .ok-msg{ 
+      background:rgba(0,255,102,.04); 
+      border:1px solid rgba(0,255,102,.2); 
+      color:#66ffb3; 
+      padding:6px 12px; 
+      font-size:.78rem; 
+      margin:8px 0; 
+    }
+
+    .col2{ 
+      display:grid; 
+      grid-template-columns:1fr 1fr; 
+      gap:14px; 
+      margin:10px 0; 
+    }
 
     @media (max-width:480px) {
       .col2 { grid-template-columns:1fr; }
       .codigo-bloque { font-size:.72rem; }
     }
+
+    .pantalla{ 
+      display: block !important; 
+    }
+    
+    .seccion{ 
+      opacity: 1 !important; 
+    }
+
   </style>
 </head>
 <body>
@@ -82,7 +162,7 @@
     <h1>📋 SQL — PLANTILLAS</h1>
     <p class="subtitulo">// Consultas habituales listas para copiar y adaptar</p>
   </header>
-  <p class="articulo-meta"><span class="articulo-tag">BASES DE DATOS</span> // 2025-03-01 — Iván Brihuega</p>
+  <p class="articulo-meta"><span class="articulo-tag">BASES DE DATOS</span> // 2026-02-12 — Iván Brihuega</p>
 
   <p style="color:#aaa;font-size:.85rem;line-height:1.6;margin:14px 0;">
     Colección de plantillas SQL para las situaciones más frecuentes en examen y prácticas.
@@ -274,7 +354,7 @@
     <a href="articulo-sql-ejercicios.html">📝 Ejercicios</a>
     <a href="index.html">🏠 HUB</a>
   </nav>
-  <footer class="pie"><p>RETROTERM.AI v0.1 © 2025 | Iván Brihuega Crespo</p></footer>
+  <footer class="pie"><p>RETROTERM.AI v0.2 © 2025 | Iván Brihuega Crespo</p></footer>
 
 </section>
 </body>

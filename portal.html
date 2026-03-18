@@ -74,7 +74,10 @@ body {
   margin: 0; padding: 0;
   scroll-behavior: smooth;
 }
-h1, h2 { text-shadow: 0 0 6px #00ff66; }
+
+h1, h2{ 
+  text-shadow: 0 0 6px #00ff66; 
+}
 
 /* PANTALLAS */
 .pantalla {
@@ -87,15 +90,30 @@ h1, h2 { text-shadow: 0 0 6px #00ff66; }
   box-shadow: 0 0 15px #00ff66;
   background: radial-gradient(circle at center, #001800 0%, #000 80%);
 }
-.pantalla.activa { display: block; }
-.seccion { opacity: 0; animation: fadeIn 1s forwards; }
-@keyframes fadeIn { to { opacity: 1; } }
+.pantalla.activa{ 
+  display: block; 
+}
+.seccion{ 
+  opacity: 0; 
+  animation: fadeIn 1s forwards; 
+}
+@keyframes fadeIn{ to { opacity: 1; } }
 
 /* BREADCRUMBS */
-.silo-breadcrumb { margin-bottom: 15px; font-size: 0.9rem; }
-.silo-breadcrumb a { color: #00ff66; text-decoration: none; }
-.silo-breadcrumb .sep { margin: 0 5px; }
-.silo-breadcrumb .actual { color: #66ffb3; }
+.silo-breadcrumb{ 
+  margin-bottom: 15px; 
+  font-size: 0.9rem; 
+}
+.silo-breadcrumb a{ 
+  color: #00ff66; 
+  text-decoration: none; 
+}
+.silo-breadcrumb .sep{ 
+  margin: 0 5px; 
+}
+.silo-breadcrumb .actual{ 
+  color: #66ffb3; 
+}
 
 /* SILO MENU */
 .silo-menu {
@@ -114,7 +132,11 @@ h1, h2 { text-shadow: 0 0 6px #00ff66; }
   text-decoration: none;
   transition: 0.3s;
 }
-.silo-menu a:hover { background: #00ff66; color: #000; box-shadow: 0 0 10px #00ff66; }
+.silo-menu a:hover{ 
+  background: #00ff66; 
+  color: #000; 
+  box-shadow: 0 0 10px #00ff66; 
+}
 
 /* MINI PUZZLE */
 #puzzle {
@@ -141,18 +163,23 @@ h1, h2 { text-shadow: 0 0 6px #00ff66; }
   cursor: pointer;
   font-family: 'Courier New', monospace;
 }
-#puzzle button:hover { box-shadow: 0 0 6px #00ff66; }
-#puzzle .msg { margin-top: 10px; color: #66ffb3; }
+#puzzle button:hover{ 
+  box-shadow: 0 0 6px #00ff66; 
+}
+#puzzle .msg{
+   margin-top: 10px; 
+   color: #66ffb3; 
+  }
 
 /* ARTICULOS HORIZONTALES */
-.core-articles-horizontal {
+.core-articles-horizontal{
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
   margin-top: 20px;
 }
-.core-articles-horizontal .articulo {
+.core-articles-horizontal .articulo{
   width: 280px;
   background: rgba(0, 20, 0, 0.8);
   border: 1px solid #00ff66;
@@ -161,14 +188,14 @@ h1, h2 { text-shadow: 0 0 6px #00ff66; }
   border-radius: 8px;
   box-sizing: border-box;
 }
-.core-articles-horizontal .articulo table {
+.core-articles-horizontal .articulo table{
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
 .core-articles-horizontal .articulo table,
 .core-articles-horizontal .articulo th,
-.core-articles-horizontal .articulo td {
+.core-articles-horizontal .articulo td{
   border: 1px solid #00ff66;
 }
 .core-articles-horizontal .articulo th,
@@ -193,7 +220,10 @@ h1, h2 { text-shadow: 0 0 6px #00ff66; }
   color: #66ffb3;
   margin-bottom: 10px;
 }
-.articulo-turco p { color: #ccc; margin-bottom: 10px; }
+.articulo-turco p{ 
+  color: #ccc; 
+  margin-bottom: 10px; 
+}
 .articulo-turco .fecha-clave {
   color: #00ffff;
   font-weight: bold;
@@ -207,16 +237,37 @@ h1, h2 { text-shadow: 0 0 6px #00ff66; }
   font-size: 0.82rem;
   color: #66ffb3;
 }
-.log-entry .log-time { color: #1a5a2a; margin-right: 10px; }
-.log-entry .log-warn { color: #ffaa00; }
-.log-entry .log-ok { color: #00ff66; }
-.log-entry .log-hint { color: #00ffff; }
+.log-entry .log-time{ 
+  color: #1a5a2a; 
+  margin-right: 10px; 
+}
+.log-entry .log-warn{ 
+  color: #ffaa00; 
+}
+.log-entry .log-ok{ 
+  color: #00ff66; 
+}
+.log-entry .log-hint{ 
+  color: #00ffff; 
+}
 
 /* RESPONSIVE */
-@media (max-width: 480px) {
-  .core-articles-horizontal { flex-direction: column; align-items: center; }
-  .core-articles-horizontal .articulo { width: 100%; }
+@media (max-width: 480px){
+  .core-articles-horizontal{ 
+    flex-direction: column; 
+    align-items: center; 
+  }
+  .core-articles-horizontal .articulo{ 
+    width: 100%; 
+  }
 }
+
+
+  .activa{ 
+    display: block !important; 
+    opacity: 1 !important; }
+
+
 </style>
 
 </head>
@@ -232,13 +283,13 @@ h1, h2 { text-shadow: 0 0 6px #00ff66; }
     <article class="articulo">
       <h3>🖼 Bienvenido a Retroterm.ai</h3>
       <p>Explora el universo retrofuturista inspirado en terminales clásicas y juegos tipo Fallout.</p>
-      <video src="Videos/video_inicio.mp4" autoplay muted loop playsinline style="width:100%; border-radius:8px;"></video>
+      <video preload="none"  src="Videos/video_inicio.mp4" autoplay muted loop playsinline style="width:100%; border-radius:8px;"></video>
     </article>
 
     <article class="articulo">
       <h3>🎮 Minijuegos y Puzzles</h3>
       <p>Encuentra minijuegos interactivos, códigos secretos y contenido oculto dentro del sistema.</p>
-      <video src="Videos/video_maquina.mp4" autoplay muted loop playsinline style="width:100%; border-radius:8px;"></video>
+      <video preload="none"  src="Videos/video_maquina.mp4" autoplay muted loop playsinline style="width:100%; border-radius:8px;"></video>
     </article>
   </div>
 
@@ -273,13 +324,13 @@ h1, h2 { text-shadow: 0 0 6px #00ff66; }
   <h1>SYSTEM LOGS</h1>
   <p>Registros del sistema. Algunos archivos requieren autorización.</p>
 
-  <div class="log-entry"><span class="log-time">[2025-01-12 09:14]</span> <span class="log-ok">SISTEMA INICIADO</span> — retroterm.ai v0.1 cargado correctamente.</div>
-  <div class="log-entry"><span class="log-time">[2025-01-12 09:15]</span> <span class="log-ok">MÓDULO EDITOR</span> — CODE_CRT v0.3 operativo.</div>
-  <div class="log-entry"><span class="log-time">[2025-01-15 11:32]</span> <span class="log-ok">MÓDULO RED</span> — 5 nodos indexados correctamente.</div>
-  <div class="log-entry"><span class="log-time">[2025-02-03 18:07]</span> <span class="log-warn">ADVERTENCIA</span> — Acceso no autorizado detectado en sector /restricted.</div>
-  <div class="log-entry"><span class="log-time">[2025-02-15 22:41]</span> <span class="log-ok">ARCHIVO DESBLOQUEADO</span> — turco_v1.classified añadido al sistema.</div>
-  <div class="log-entry"><span class="log-time">[2025-03-01 10:00]</span> <span class="log-hint">PISTA</span> — El código de acceso es el año en que todo empezó. La respuesta está en INICIO.</div>
-  <div class="log-entry"><span class="log-time">[2025-03-01 10:01]</span> <span class="log-warn">ACCESO RESTRINGIDO</span> — Se requiere código de 4 dígitos para continuar.</div>
+  <div class="log-entry"><span class="log-time">[2025-09-12 09:14]</span> <span class="log-ok">SISTEMA INICIADO</span> — retroterm.ai v0.1 cargado correctamente.</div>
+  <div class="log-entry"><span class="log-time">[2025-10-20 09:15]</span> <span class="log-ok">MÓDULO EDITOR</span> — CODE_CRT v0.3 operativo.</div>
+  <div class="log-entry"><span class="log-time">[2025-11-15 11:32]</span> <span class="log-ok">MÓDULO RED</span> — 5 nodos indexados correctamente.</div>
+  <div class="log-entry"><span class="log-time">[2025-12-03 18:07]</span> <span class="log-warn">ADVERTENCIA</span> — Acceso no autorizado detectado en sector /restricted.</div>
+  <div class="log-entry"><span class="log-time">[2026-01-15 22:41]</span> <span class="log-ok">ARCHIVO DESBLOQUEADO</span> — turco_v1.classified añadido al sistema.</div>
+  <div class="log-entry"><span class="log-time">[2026-03-01 10:00]</span> <span class="log-hint">PISTA</span> — El código de acceso es el año en que todo empezó. La respuesta está en INICIO.</div>
+  <div class="log-entry"><span class="log-time">[2026-04-04 10:01]</span> <span class="log-warn">ACCESO RESTRINGIDO</span> — Se requiere código de 4 dígitos para continuar.</div>
 
   <div id="puzzle">
     <p>Introduce el código secreto:</p>

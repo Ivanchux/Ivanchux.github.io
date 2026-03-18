@@ -105,9 +105,20 @@ body {
   resize: vertical;
 }
 
-#html-editor { border-left: 3px solid #00ff66; background: #001a00; }  /* verde  */
-#css-editor  { border-left: 3px solid #6fb3d2; background: #001015; }  /* azul   */
-#js-editor   { border-left: 3px solid #f0db4f; background: #1a1800; }  /* amarillo */
+#html-editor{ 
+  border-left: 3px solid #00ff66; 
+  background: #001a00; 
+}  
+
+#css-editor{ 
+  border-left: 3px solid #6fb3d2; 
+  background: #001015; 
+}  
+
+#js-editor{ 
+  border-left: 3px solid #f0db4f; 
+  background: #1a1800; 
+}  
 
 /* ===== Marco del editor ===== */
 .editor-marco {
@@ -143,9 +154,21 @@ body {
   letter-spacing: 1px;
 }
 
-.editor-label-html { color: #f7c94b; border-color: #f7c94b; background: #1a1500; }
-.editor-label-css  { color: #6fb3d2; border-color: #6fb3d2; background: #001015; }
-.editor-label-js   { color: #f0db4f; border-color: #f0db4f; background: #1a1800; }
+.editor-label-html{ 
+  color: #f7c94b; 
+  border-color: #f7c94b; 
+  background: #1a1500; 
+}
+.editor-label-css{ 
+  color: #6fb3d2; 
+  border-color: #6fb3d2; 
+  background: #001015; }
+
+  .editor-label-js{ 
+  color: #f0db4f; 
+  border-color: #f0db4f; 
+  background: #1a1800; 
+}
 
 /* ===== Botones del editor ===== */
 .editor-botones {
@@ -182,3 +205,4 @@ body {
   background: #fff;
   box-shadow: 0 0 10px #00ff6644;
 }
+

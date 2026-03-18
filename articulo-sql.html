@@ -16,7 +16,7 @@
     "description": "Guía práctica de SQL: DDL, DML, DCL, SELECT, JOINs, GROUP BY, funciones y trucos de examen.",
     "author": { "@type": "Person", "name": "Iván Brihuega Crespo" },
     "publisher": { "@type": "Organization", "name": "RETROTERM.AI", "url": "https://ivanchux.github.io/" },
-    "datePublished": "2025-03-01",
+    "datePublished": "2026-01-24",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ivanchux.github.io/articulo-sql.html" }
   }
   </script>
@@ -40,9 +40,19 @@
       margin-bottom: 18px;
       letter-spacing: 1px;
     }
-    .breadcrumbs a { color: #00ff6688; text-decoration: none; }
-    .breadcrumbs a:hover { color: #00ff66; }
-    .breadcrumbs span { color: #00ff6633; margin: 0 6px; }
+    .breadcrumbs a{ 
+      color: #00ff6688; 
+      text-decoration: none; 
+    }
+    
+    .breadcrumbs a:hover{ 
+      color: #00ff66; 
+    }
+    
+    .breadcrumbs span{ 
+      color: #00ff6633; 
+      margin: 0 6px; 
+    }
 
     /* secciones del artículo */
     .sql-seccion {
@@ -60,14 +70,37 @@
       align-items: center;
       gap: 8px;
     }
-    .sql-seccion-titulo.ddl  { color: #ff6b6b; background: rgba(255,107,107,0.06); }
-    .sql-seccion-titulo.dml  { color: #00ff66; background: rgba(0,255,102,0.04); }
-    .sql-seccion-titulo.dcl  { color: #c77dff; background: rgba(199,125,255,0.06); }
-    .sql-seccion-titulo.sel  { color: #4fc3ff; background: rgba(79,195,255,0.06); }
-    .sql-seccion-titulo.join { color: #4fc3ff; background: rgba(79,195,255,0.06); }
-    .sql-seccion-titulo.fn   { color: #ffd166; background: rgba(255,209,102,0.06); }
-    .sql-seccion-titulo.tip  { color: #c77dff; background: rgba(199,125,255,0.06); }
-    .sql-seccion-body { padding: 14px; }
+    .sql-seccion-titulo.ddl{ 
+      color: #ff6b6b; 
+      background: rgba(255,107,107,0.06); 
+    }
+    .sql-seccion-titulo.dml{ 
+      color: #00ff66; 
+      background: rgba(0,255,102,0.04); 
+    }
+    .sql-seccion-titulo.dcl{ 
+      color: #c77dff; 
+      background: rgba(199,125,255,0.06); 
+    }
+    .sql-seccion-titulo.sel{ 
+      color: #4fc3ff; 
+      background: rgba(79,195,255,0.06); 
+    }
+    .sql-seccion-titulo.join{ 
+      color: #4fc3ff; 
+      background: rgba(79,195,255,0.06); 
+    }
+    .sql-seccion-titulo.fn{ 
+      color: #ffd166; 
+      background: rgba(255,209,102,0.06); 
+    }
+    .sql-seccion-titulo.tip{ 
+      color: #c77dff; 
+      background: rgba(199,125,255,0.06); 
+    }
+    .sql-seccion-body{ 
+      padding: 14px; 
+    }
 
     /* bloques de código */
     .codigo-bloque {
@@ -85,13 +118,29 @@
     }
 
     /* colores SQL */
-    .kw  { color: #ff79c6; font-weight: bold; }
-    .fn  { color: #00ff66; }
-    .str { color: #f1fa8c; }
-    .num { color: #bd93f9; }
-    .cmt { color: #555; font-style: italic; }
-    .tbl { color: #4fc3ff; }
-    .op  { color: #ffb86c; }
+    .kw{ 
+      color: #ff79c6; 
+      font-weight: bold; 
+    }
+    .fn{ 
+      color: #00ff66; 
+    }
+    .str{ 
+      color: #f1fa8c; 
+    }
+    .num{ 
+      color: #bd93f9; 
+    }
+    .cmt{ 
+      color: #555; 
+      font-style: italic; 
+    }
+    .tbl{ 
+      color: #4fc3ff; 
+    }
+    .op{ 
+      color: #ffb86c; 
+    }
 
     /* aviso y ok */
     .aviso {
@@ -142,12 +191,26 @@
       vertical-align: top;
       color: #ccc;
     }
-    .tabla-sql tr:last-child td { border-bottom: none; }
-    .tabla-sql .k { color: #00ff66; font-family: 'Courier New', monospace; }
-    .tabla-sql .tag-ddl { color: #ff6b6b; }
-    .tabla-sql .tag-dml { color: #00ff66; }
-    .tabla-sql .tag-dcl { color: #c77dff; }
-    .tabla-sql .az { color: #4fc3ff; font-family: 'Courier New', monospace; }
+    .tabla-sql tr:last-child td{ 
+      border-bottom: none; 
+    }
+    .tabla-sql .k{ 
+      color: #00ff66; 
+      font-family: 'Courier New', monospace; 
+    }
+    .tabla-sql .tag-ddl{ 
+      color: #ff6b6b; 
+    }
+    .tabla-sql .tag-dml{ 
+      color: #00ff66; 
+    }
+    .tabla-sql .tag-dcl{ 
+      color: #c77dff; 
+    }
+    .tabla-sql .az { 
+      color: #4fc3ff; 
+      font-family: 'Courier New', monospace; 
+    }
 
     /* grid dos columnas */
     .col2 {
@@ -158,8 +221,12 @@
     }
 
     @media (max-width: 480px) {
-      .col2 { grid-template-columns: 1fr; }
-      .codigo-bloque { font-size: 0.72rem; }
+      .col2{ 
+        grid-template-columns: 1fr; 
+      }
+      .codigo-bloque{ 
+        font-size: 0.72rem; 
+      }
     }
   </style>
 </head>
@@ -441,7 +508,7 @@
   </nav>
 
   <footer class="pie">
-    <p>RETROTERM.AI v0.1 © 2025 | Iván Brihuega Crespo</p>
+    <p>RETROTERM.AI v0.2 © 2025 | Iván Brihuega Crespo</p>
   </footer>
 
 </section>
