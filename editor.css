@@ -1,10 +1,10 @@
 /* ===== Contenedor principal ===== */
-h1{
+h1 {
   font-size: 2rem;
   text-shadow: 0 0 8px #00ff66;
 }
 
-.pantalla{
+.pantalla {
   width: 90%;
   max-width: 900px;
   border: 2px solid #00ff66;
@@ -16,31 +16,31 @@ h1{
 }
 
 .activa,
-:target{
+:target {
   display: block;
 }
 
-.seccion{
+.seccion {
   opacity: 0;
   animation: fadeIn 1s ease-in-out forwards;
 }
 
-@keyframes fadeIn{
+@keyframes fadeIn {
   to { opacity: 1; }
 }
 
 /* ===== Cabecera ===== */
-.cabecera{
+.cabecera {
   text-align: center;
 }
 
-.subtitulo{
+.subtitulo {
   color: #66ffb3;
   font-size: 0.9rem;
 }
 
 /* ===== Enlace de retorno ===== */
-.volver{
+.volver {
   display: inline-block;
   text-decoration: none;
   color: #00ff66;
@@ -50,29 +50,29 @@ h1{
   transition: all 0.3s ease;
 }
 
-.volver:hover{
+.volver:hover {
   background-color: #00ff66;
   color: #000;
 }
 
 /* ===== Pie de página específico ===== */
-.pie-seccion{
+.pie-seccion {
   margin-top: 25px;
   text-align: center;
 }
 
 /* ===== Cursor parpadeante ===== */
-@keyframes blink{
+@keyframes blink {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
 }
 
-.cursor-blink{
+.cursor-blink {
   animation: blink 1.5s infinite;
 }
 
 /* ===== Tipografía y cuerpo ===== */
-body{
+body {
   background-color: #000;
   color: #00ff66;
   font-family: 'Courier New', monospace;
@@ -81,7 +81,7 @@ body{
   height: 100vh;
   scroll-behavior: smooth;
 }
-.editor-contenedor{
+.editor-contenedor {
   width: 100%;
   border: 2px solid #00ff66;
   border-radius: 4px;
@@ -89,7 +89,7 @@ body{
   box-sizing: border-box;
 }
 
-.editor-contenedor textarea{
+.editor-contenedor textarea {
   display: block;
   width: 100%;
   min-height: 450px;
@@ -121,11 +121,11 @@ body{
 }  
 
 /* ===== Marco del editor ===== */
-.editor-marco{
+.editor-marco {
   margin-top: 20px;
 }
 
-.editor-barra{
+.editor-barra {
   background: #001a00;
   border: 2px solid #00ff66;
   border-bottom: none;
@@ -137,13 +137,13 @@ body{
   align-items: center;
 }
 
-.editor-barra-estado{
+.editor-barra-estado {
   color: #00ff66;
   font-size: 0.75rem;
 }
 
 /* ===== Etiquetas de sección ===== */
-.editor-label{
+.editor-label {
   display: inline-block;
   font-size: 0.72rem;
   font-family: 'Courier New', monospace;
@@ -155,15 +155,14 @@ body{
 }
 
 .editor-label-html{ 
-  color: #f7c94b; 
-  border-color: #f7c94b; 
-  background: #1a1500; 
+  color: #001a00; 
+  border-color: #001a00; 
+  background: #00ff663b; 
 }
 .editor-label-css{ 
   color: #6fb3d2; 
   border-color: #6fb3d2; 
-  background: #001015; 
-}
+  background: #001015; }
 
   .editor-label-js{ 
   color: #f0db4f; 
@@ -172,14 +171,14 @@ body{
 }
 
 /* ===== Botones del editor ===== */
-.editor-botones{
+.editor-botones {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 12px;
 }
 
-.editor-botones button{
+.editor-botones button {
   padding: 8px 16px;
   background: #000;
   color: #00ff66;
@@ -191,19 +190,58 @@ body{
   margin-top: 0;
 }
 
-.editor-botones button:hover{
+.editor-botones button:hover {
   background: #00ff66;
   color: #000;
   box-shadow: 0 0 10px #00ff66;
 }
 
 /* ===== Preview iframe ===== */
-#preview{
+#preview {
   width: 100%;
   height: 300px;
   margin-top: 14px;
   border: 2px solid #00ff66;
   background: #fff;
   box-shadow: 0 0 10px #00ff6644;
+}
+
+/* ── RESPONSIVE ── */
+
+@media (max-width: 640px) {
+  .editor-contenedor {
+    display: block;
+  }
+
+  .editor-label {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-left: 2px solid;
+    border-top: none;
+    border-right: none;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+  }
+
+  .editor-contenedor textarea {
+    min-height: 160px;
+    font-size: 0.85rem;
+    width: 100%;
+  }
+
+  #preview {
+    height: 200px;
+  }
+
+  .editor-botones {
+    justify-content: center;
+  }
+
+  .editor-botones button {
+    flex: 1 1 40%;
+    font-size: 0.75rem;
+    padding: 8px 10px;
+  }
 }
 
