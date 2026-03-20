@@ -266,6 +266,7 @@
     .chat-area {
       flex: 1;
       overflow-y: auto;
+      overflow-x: hidden;
       padding: 16px;
       display: flex;
       flex-direction: column;
@@ -314,6 +315,8 @@
       padding: 9px 13px;
       font-size: 0.85rem;
       line-height: 1.65;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
     .msg-row.aria .msg-burbuja {
       border: 1px solid #003300;
