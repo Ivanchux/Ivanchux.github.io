@@ -15,17 +15,17 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
   <style>
-    /* ══ CABECERA ══ */
-    .defi-header {
+    /* CABECERA */
+    .defi-header{
       text-align: center;
       margin-bottom: 24px;
     }
-    .defi-header h1 {
+    .defi-header h1{
       font-size: 1.8rem;
       letter-spacing: 4px;
       text-shadow: 0 0 10px #00ff66;
     }
-    .defi-header p {
+    .defi-header p{
       color: #66ffb3;
       font-size: 0.78rem;
       letter-spacing: 3px;
@@ -33,7 +33,9 @@
     }
 
     /* ══ VISTA PRINCIPAL oculta cuando hay :target ══ */
-    .defi-main { display: block; }
+    .defi-main{ 
+      display: block; 
+    }
 
     #bitcoin:target ~ .defi-main,
     #ethereum:target ~ .defi-main,
@@ -52,23 +54,23 @@
       display: none;
     }
 
-    /* ══ VISTAS DETALLE ocultas por defecto ══ */
+    /* VISTA DETALLADA POR MONEDA ocultas por defecto */
     .defi-detalle{ 
       display: none; 
     }
-    .defi-detalle:target { 
+    .defi-detalle:target{ 
       display: block; 
     }
 
-    /* ══ TABS DE NAVEGACIÓN ══ */
-    .defi-tabs {
+    /* TABS DE NAVEGACIÓN */
+    .defi-tabs{
       display: flex;
       gap: 4px;
       margin-bottom: 20px;
       border-bottom: 1px solid #003300;
       flex-wrap: wrap;
     }
-    .defi-tab {
+    .defi-tab{
       padding: 8px 16px;
       border: 1px solid #003300;
       border-bottom: none;
@@ -81,13 +83,13 @@
       transition: 0.2s;
     }
 
-    .defi-tab:hover, .defi-tab.activo {
+    .defi-tab:hover, .defi-tab.activo{
       color: #00ff66;
       background: rgba(0, 30, 0, 0.8);
       border-color: #00ff66;
     }
 
-    /* ══ TABLA DE PRECIOS ══ */
+    /* TABLA DE PRECIOS */
     .precios-wrap{ 
       overflow-x: auto; 
     }
@@ -164,7 +166,7 @@
       letter-spacing: 2px; 
     }
 
-    /* ══ DETALLE MONEDA ══ */
+    /* DETALLE MONEDA */
     .detalle-moneda-header{ 
       margin-bottom: 16px;
     }
@@ -193,26 +195,26 @@
       margin-bottom: 20px;
     }
 
-    /* ══ GRÁFICA CANVAS ══ */
-    .grafica-wrap {
+    /* GRÁFICA CANVAS */
+    .grafica-wrap{
       border: 1px solid #003300;
       background: #000;
       padding: 10px;
       margin-bottom: 20px;
       position: relative;
     }
-    .grafica-titulo {
+    .grafica-titulo{
       font-size: 0.65rem;
       color: #1a4a2a;
       letter-spacing: 2px;
       margin-bottom: 8px;
     }
-    canvas {
+    canvas{
       width: 100%;
       height: 160px;
       display: block;
     }
-    .grafica-cargando {
+    .grafica-cargando{
       text-align: center;
       padding: 60px 0;
       color: #1a4a2a;
@@ -220,13 +222,13 @@
       letter-spacing: 2px;
     }
 
-    .detalle-datos {
+    .detalle-datos{
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 20px;
     }
-    .dato {
+    .dato{
       border: 1px solid #003300;
       padding: 5px 12px;
       font-size: 0.72rem;
@@ -237,57 +239,57 @@
       color: #aaa; 
     }
 
-    .detalle-desc {
+    .detalle-desc{
       font-size: 0.85rem;
       color: #ccc;
       line-height: 1.8;
       margin-bottom: 16px;
     }
 
-    /* ══ GLOSARIO ══ */
+    /* GLOSARIO */
     .glosario-lista{
        margin-top: 10px; 
       }
 
-    .glosario-item {
+    .glosario-item{
       border-left: 2px solid #003300;
       padding: 10px 16px;
       margin-bottom: 12px;
       background: rgba(0, 15, 0, 0.5);
     }
-    .glosario-item h4 {
+    .glosario-item h4{
       color: #00ff66;
       font-size: 0.85rem;
       letter-spacing: 2px;
       margin-bottom: 4px;
     }
-    .glosario-item p {
+    .glosario-item p{
       color: #aaa;
       font-size: 0.8rem;
       line-height: 1.7;
     }
 
-    /* ══ NOTICIAS ══ */
-    .noticia {
+    /* NOTICIAS */
+    .noticia{
       border: 1px solid #003300;
       background: rgba(0, 15, 0, 0.5);
       padding: 14px 16px;
       margin-bottom: 14px;
     }
-    .noticia-meta {
+    .noticia-meta{
       font-size: 0.68rem;
       color: #1a4a2a;
       letter-spacing: 2px;
       margin-bottom: 6px;
     }
-    .noticia-meta .tag {
+    .noticia-meta .tag{
       border: 1px solid #003300;
       padding: 1px 6px;
       color: #00ff66;
       margin-right: 8px;
       font-size: 0.65rem;
     }
-    .noticia h4 {
+    .noticia h4{
       color: #66ffb3;
       font-size: 0.9rem;
       margin-bottom: 8px;
@@ -299,8 +301,8 @@
       line-height: 1.7; 
     }
 
-    /* ══ VOLVER ══ */
-    .defi-volver {
+    /* VOLVER */
+    .defi-volver{
       display: inline-block;
       margin-bottom: 16px;
       padding: 6px 14px;
@@ -316,8 +318,8 @@
       color: #000; 
     }
 
-    /* ══ FOOTER ══ */
-    .defi-footer {
+    /* FOOTER */
+    .defi-footer{
       margin-top: 30px;
       padding-top: 14px;
       border-top: 1px solid #003300;
@@ -336,7 +338,7 @@
       color: #66ffb3; 
     }
 
-    /* ══ RESPONSIVE ══ */
+    /* RESPONSIVE */
     @media (max-width: 480px){
       .defi-header h1{ 
         font-size: 1.3rem; 
@@ -358,9 +360,7 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     VISTAS DETALLE — se muestran con :target
-     ══════════════════════════════════════ -->
+<!--VISTAS DETALLADAS DE LAS MONEDAS // se muestran con :target -->
 
 <!-- BITCOIN -->
 <section id="bitcoin" class="pantalla seccion defi-detalle">
@@ -779,9 +779,7 @@
 </section>
 
 
-<!-- ══════════════════════════════════════
-     VISTA PRINCIPAL
-     ══════════════════════════════════════ -->
+<!--------------------------------------------VISTA PRINCIPAL-------------------------------------------->
 <section id="defi-main" class="pantalla seccion activa defi-main">
 
   <div class="defi-header">
@@ -823,9 +821,7 @@
 
 
 <script>
-// ═══════════════════════════════════════════
-// MONEDAS — IDs de CoinGecko
-// ═══════════════════════════════════════════
+// --------------------------------------------MONEDAS — IDs de CoinGecko-------------------------------------------- // 
 var MONEDAS = [
   { id: 'bitcoin',      sym: 'BTC', nombre: 'Bitcoin' },
   { id: 'ethereum',     sym: 'ETH', nombre: 'Ethereum' },
@@ -841,9 +837,7 @@ var MONEDAS = [
   { id: 'litecoin',     sym: 'LTC', nombre: 'Litecoin' }
 ];
 
-// ═══════════════════════════════════════════
-// CARGAR TABLA DE PRECIOS
-// ═══════════════════════════════════════════
+// CARGAR TABLA DE PRECIOS // 
 function cargarPrecios() {
   var ids = MONEDAS.map(function(m) { return m.id; }).join(',');
   fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + ids + '&order=market_cap_desc&per_page=12&page=1&sparkline=false&price_change_percentage=24h,7d')
@@ -876,9 +870,8 @@ function cargarPrecios() {
     });
 }
 
-// ═══════════════════════════════════════════
-// CARGAR GRÁFICA DE UNA MONEDA
-// ═══════════════════════════════════════════
+
+// CARGAR GRÁFICA DE UNA MONEDA // 
 function cargarGrafica(id) {
   var loading = document.getElementById('loading-' + id);
   var canvas  = document.getElementById('canvas-' + id);
@@ -971,9 +964,8 @@ function cargarGrafica(id) {
     });
 }
 
-// ═══════════════════════════════════════════
-// DETECTAR HASH Y LANZAR FETCH CORRECTO
-// ═══════════════════════════════════════════
+
+// DETECTAR HASH Y LANZAR FETCH CORRECTO // 
 function onHash() {
   var hash = location.hash.replace('#', '');
   var ids = MONEDAS.map(function(m) { return m.id; });
