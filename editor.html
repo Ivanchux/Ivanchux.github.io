@@ -4,15 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CODE_CRT — Editor Retro | RETROTERM.AI</title>
-  <link rel="stylesheet" href="estilos.css" />
+  <link rel="stylesheet" href="editor.css">
   <link rel="icon" href="favicon.ico" />
-
   <style>
-    .activa{ 
-      display: block !important; 
-      opacity: 1 !important; }
-  </style>
+    .activa{
+      display: block !important;
+      opacity: 1 !important;
+    }
 
+    /* Tres columnas en escritorio */
+    .editor-contenedor{
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0;
+      width: 100%;
+      border: 2px solid #00ff66;
+      border-radius: 4px;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .editor-par{
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 0;
+    }
+
+    .editor-par + .editor-par{
+      border-left: 2px solid #00ff66;
+    }
+
+    /* Apilar en móvil */
+    @media(max-width: 768px){
+      .editor-contenedor{
+        flex-wrap: wrap;
+      }
+      .editor-par{
+        width: 100%;
+        flex: none;
+        border-left: none !important;
+        border-top: 2px solid #00ff66;
+      }
+      .editor-par:first-child{
+        border-top: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -23,37 +60,37 @@
     <p class="subtitulo">CODE_CRT — Editor retro integrado</p>
   </header>
 
-  <div class="editor-marco">
-    <div class="editor-barra">
-      <span>CODE_CRT v0.1 &mdash; Retro Integrated</span>
-      <span class="editor-barra-estado" id="estado">&#9679; LISTO</span>
-    </div>
+  <div class="editor-contenedor">
 
-    <div class="editor-contenedor">
+    <div class="editor-par">
       <div class="editor-label editor-label-html">HTML</div>
       <textarea id="html-editor" class="editor-crt" spellcheck="false"><!-- HTML -->
 <h1>Hola RetroTerm</h1>
 <p>Escribe HTML, CSS y JS a la vez</p></textarea>
+    </div>
 
+    <div class="editor-par">
       <div class="editor-label editor-label-css">CSS</div>
       <textarea id="css-editor" class="editor-crt" spellcheck="false">/* CSS */
 body { background: #000; color: #00ff66; font-family: 'Courier New', monospace; }
 h1 { text-shadow: 0 0 6px #00ff66; }</textarea>
+    </div>
 
+    <div class="editor-par">
       <div class="editor-label editor-label-js">JS</div>
       <textarea id="js-editor" class="editor-crt" spellcheck="false">// JS
 console.log("RetroCRT funcionando!");</textarea>
     </div>
 
-    <div class="editor-botones">
-      <button id="ejecutar">&#9654; Ejecutar</button>
-      <button id="limpiar">&#129529; Limpiar Preview</button>
-      <button id="guardar">&#128190; Guardar</button>
-    </div>
-
-    <iframe loading="lazy" id="preview"></iframe>
-
   </div>
+
+  <div class="editor-botones">
+    <button id="ejecutar">&#9654; Ejecutar</button>
+    <button id="limpiar">&#129529; Limpiar Preview</button>
+    <button id="guardar">&#128190; Guardar</button>
+  </div>
+
+  <iframe loading="lazy" id="preview"></iframe>
 
   <a href="index.html" class="volver">&#8592; Volver al HUB</a>
 
@@ -61,26 +98,23 @@ console.log("RetroCRT funcionando!");</textarea>
 
 <script>
   const htmlEditor = document.getElementById('html-editor');
-  const cssEditor = document.getElementById('css-editor');
-  const jsEditor = document.getElementById('js-editor');
-  const preview = document.getElementById('preview');
+  const cssEditor  = document.getElementById('css-editor');
+  const jsEditor   = document.getElementById('js-editor');
+  const preview    = document.getElementById('preview');
 
-  function actualizarPreview() {
+  function actualizarPreview(){
     const html = htmlEditor.value;
-    const css = "<style>" + cssEditor.value + "</style>";
-    const js = "<script>" + jsEditor.value + "<\/script>";
+    const css  = "<style>" + cssEditor.value + "<\/style>";
+    const js   = "<script>" + jsEditor.value + "<\/script>";
     preview.srcdoc = html + css + js;
   }
 
-  // Ejecutar manualmente
   document.getElementById('ejecutar').addEventListener('click', actualizarPreview);
 
-  // Limpiar preview
   document.getElementById('limpiar').addEventListener('click', () => {
     preview.srcdoc = "";
   });
 
-  // Guardar en localStorage
   document.getElementById('guardar').addEventListener('click', () => {
     localStorage.setItem('htmlCRT', htmlEditor.value);
     localStorage.setItem('cssCRT', cssEditor.value);
@@ -88,30 +122,17 @@ console.log("RetroCRT funcionando!");</textarea>
     alert('Código guardado en el navegador.');
   });
 
-  // Cargar desde localStorage
-  document.getElementById('cargar').addEventListener('click', () => {
-    const h = localStorage.getItem('htmlCRT');
-    const c = localStorage.getItem('cssCRT');
-    const j = localStorage.getItem('jsCRT');
-    if(h) htmlEditor.value = h;
-    if(c) cssEditor.value = c;
-    if(j) jsEditor.value = j;
-    actualizarPreview();
-  });
-
-  // Vista previa en tiempo real
   [htmlEditor, cssEditor, jsEditor].forEach(editor => {
     editor.addEventListener('input', actualizarPreview);
   });
 
-  // Cargar automáticamente al iniciar
   window.addEventListener('load', () => {
     const h = localStorage.getItem('htmlCRT');
     const c = localStorage.getItem('cssCRT');
     const j = localStorage.getItem('jsCRT');
     if(h) htmlEditor.value = h;
-    if(c) cssEditor.value = c;
-    if(j) jsEditor.value = j;
+    if(c) cssEditor.value  = c;
+    if(j) jsEditor.value   = j;
     actualizarPreview();
   });
 </script>
