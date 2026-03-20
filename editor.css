@@ -143,31 +143,47 @@ body {
 }
 
 /* ===== Etiquetas de sección ===== */
-.editor-label {
-  display: inline-block;
+.editor-label{
+  display: flex;
+  align-content: flex-start;
   font-size: 0.72rem;
   font-family: 'Courier New', monospace;
   padding: 2px 10px;
   border-top: 2px solid;
   border-right: 2px solid;
+  border-bottom: 1px solid #003300;
   margin-bottom: 0;
   letter-spacing: 1px;
 }
 
 .editor-label-html{ 
-  color: #001a00; 
-  border-color: #001a00; 
-  background: #00ff663b; 
+  color: #00ff66; 
+  border-color: #66ffb3; 
+  background: #001a00 !important; 
 }
 .editor-label-css{ 
   color: #6fb3d2; 
   border-color: #6fb3d2; 
-  background: #001015; }
-
-  .editor-label-js{ 
+  background: #001015 !important; 
+}
+.editor-label-js{ 
   color: #f0db4f; 
   border-color: #f0db4f; 
-  background: #1a1800; 
+  background: #1a1800 !important; 
+}
+
+.editor-par {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.editor-par .editor-label {
+  flex-shrink: 0;
+}
+
+.editor-par textarea {
+  flex: 1;
 }
 
 /* ===== Botones del editor ===== */
@@ -244,4 +260,24 @@ body {
     padding: 8px 10px;
   }
 }
+
+@media (min-width: 641px) {
+  .editor-label {
+    align-self: stretch;
+  }
+
+  .editor-label-html {
+    background: #001a00;
+  }
+
+  .editor-label-css {
+    background: #001015;
+  }
+
+  .editor-label-js {
+    background: #1a1800;
+  }
+}
+
+
 
