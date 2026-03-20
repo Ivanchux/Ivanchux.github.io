@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CODE_CRT — Editor Retro | RETROTERM.AI</title>
   <link rel="stylesheet" href="estilos.css" />
-  <link rel="stylesheet" href="editor.css">
   <link rel="icon" href="favicon.ico" />
 
   <style>
     .activa{ 
       display: block !important; 
-      opacity: 1 !important; 
-    }
+      opacity: 1 !important; }
   </style>
 
 </head>
@@ -25,27 +23,27 @@
     <p class="subtitulo">CODE_CRT — Editor retro integrado</p>
   </header>
 
-  <div class="editor-contenedor">
-  <div class="editor-par">
-    <div class="editor-label editor-label-html">HTML</div>
-    <textarea id="html-editor" class="editor-crt" spellcheck="false"><!-- HTML -->
+  <div class="editor-marco">
+    <div class="editor-barra">
+      <span>CODE_CRT v0.1 &mdash; Retro Integrated</span>
+      <span class="editor-barra-estado" id="estado">&#9679; LISTO</span>
+    </div>
+
+    <div class="editor-contenedor">
+      <div class="editor-label editor-label-html">HTML</div>
+      <textarea id="html-editor" class="editor-crt" spellcheck="false"><!-- HTML -->
 <h1>Hola RetroTerm</h1>
 <p>Escribe HTML, CSS y JS a la vez</p></textarea>
-  </div>
 
-  <div class="editor-par">
-    <div class="editor-label editor-label-css">CSS</div>
-    <textarea id="css-editor" class="editor-crt" spellcheck="false">/* CSS */
+      <div class="editor-label editor-label-css">CSS</div>
+      <textarea id="css-editor" class="editor-crt" spellcheck="false">/* CSS */
 body { background: #000; color: #00ff66; font-family: 'Courier New', monospace; }
 h1 { text-shadow: 0 0 6px #00ff66; }</textarea>
-  </div>
 
-  <div class="editor-par">
-    <div class="editor-label editor-label-js">JS</div>
-    <textarea id="js-editor" class="editor-crt" spellcheck="false">// JS
+      <div class="editor-label editor-label-js">JS</div>
+      <textarea id="js-editor" class="editor-crt" spellcheck="false">// JS
 console.log("RetroCRT funcionando!");</textarea>
-  </div>
-</div>
+    </div>
 
     <div class="editor-botones">
       <button id="ejecutar">&#9654; Ejecutar</button>
@@ -88,6 +86,17 @@ console.log("RetroCRT funcionando!");</textarea>
     localStorage.setItem('cssCRT', cssEditor.value);
     localStorage.setItem('jsCRT', jsEditor.value);
     alert('Código guardado en el navegador.');
+  });
+
+  // Cargar desde localStorage
+  document.getElementById('cargar').addEventListener('click', () => {
+    const h = localStorage.getItem('htmlCRT');
+    const c = localStorage.getItem('cssCRT');
+    const j = localStorage.getItem('jsCRT');
+    if(h) htmlEditor.value = h;
+    if(c) cssEditor.value = c;
+    if(j) jsEditor.value = j;
+    actualizarPreview();
   });
 
   // Vista previa en tiempo real
