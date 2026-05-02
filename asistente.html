@@ -7,6 +7,7 @@
   <meta name="description" content="ARIA, el asistente de inteligencia artificial integrado en RETROTERM.AI.">
   <meta name="robots" content="index,follow">
   <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="accesibilidad.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
     /* ── LAYOUT RAÍZ ── */
@@ -33,10 +34,19 @@
       flex-direction: column;
       flex-shrink: 0;
       transition: width 0.2s ease, padding 0.2s ease;
-      overflow: hidden;
+      overflow: visible;  /* permite que el toggle sobresalga cuando está colapsado */
       position: relative;
       z-index: 10;
     }
+    /* Ocultar contenido interior al colapsar pero no el toggle */
+    /* Hijos del sidebar: transición suave de opacidad al colapsar */
+    .sb-header, .sb-list, .sb-footer {
+      transition: opacity 0.15s ease;
+      overflow: hidden;
+    }
+    .aria-sidebar.collapsed .sb-header,
+    .aria-sidebar.collapsed .sb-list,
+    .aria-sidebar.collapsed .sb-footer { opacity: 0; pointer-events: none; }
     .aria-sidebar.collapsed { width: 0; border-right: none; }
 
     .sb-header {
@@ -134,24 +144,39 @@
     .sb-toggle {
       position: absolute;
       top: 50%;
-      right: -11px;
+      right: -14px;
       transform: translateY(-50%);
-      width: 11px;
-      height: 36px;
-      background: #0a0a0a;
-      border: 1px solid #0a2a0a;
+      width: 14px;
+      height: 44px;       /* mínimo táctil WCAG 2.5.5 */
+      background: #0a1a0a;
+      border: 1px solid #1a4a2a;
       border-left: none;
+      border-radius: 0 4px 4px 0;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 0.5rem;
-      color: #1a4a2a;
+      font-size: 0.55rem;
+      color: #3a7a4a;
       z-index: 20;
-      transition: color 0.15s, background 0.15s;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
       flex-shrink: 0;
+      padding: 0;
     }
-    .sb-toggle:hover { color: #00ff66; background: rgba(0,255,102,0.06); }
+    .sb-toggle:hover,
+    .sb-toggle:focus-visible {
+      color: #00ff66;
+      background: rgba(0,255,102,0.08);
+      border-color: #00ff66;
+      outline: 2px solid #00ff66;
+      outline-offset: 2px;
+    }
+    /* Cuando collapsed: el toggle sale desde position 0 del sidebar (que tiene width:0) */
+    .aria-sidebar.collapsed .sb-toggle {
+      right: -14px;
+      border-left: 1px solid #1a4a2a;
+      border-radius: 4px;
+    }
 
     /* ══════════════════════════════════════
        ÁREA PRINCIPAL
@@ -222,8 +247,12 @@
       padding: 4px 9px;
       cursor: pointer;
       transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
     }
-    .topbar-btn:hover { border-color: #00ff66; color: #00ff66; }
+    .topbar-btn:hover,
+    .topbar-btn:focus-visible { border-color: #00ff66; color: #00ff66; }
     .topbar-btn.danger:hover { border-color: #ff5555; color: #ff5555; }
     .mob-menu-btn {
       display: none;
@@ -369,7 +398,7 @@
       font-size: 0.88rem;
       caret-color: #00ff66;
     }
-    .chat-input::placeholder { color: #1a3a1a; }
+    .chat-input::placeholder { color: #4a9a6a; }
     .chat-input:disabled { opacity: 0.4; }
     .chat-send-btn {
       background: none;
@@ -437,9 +466,29 @@
       .sb-overlay.visible { display: block; }
       .msg-burbuja { max-width: 88%; font-size: 0.82rem; }
     }
-  </style>
+  
+  /* ── CANVAS FONDO ─── */
+  #bg-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.45;
+  }
+  /* fondo transparente sobre canvas */
+  .pantalla, .pantalla-wide {
+    background: transparent !important;
+    border-color: #00ff6633 !important;
+    box-shadow: 0 0 15px #00ff6622 !important;
+  }
+</style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">→ Saltar al contenido principal</a>
+<canvas id="bg-canvas" aria-hidden="true" role="presentation"></canvas>
+<main id="main-content">
+<h1 class="sr-only">ARIA — Asistente IA · RETROTERM.AI</h1>
 
 <div class="aria-root">
 
@@ -447,7 +496,7 @@
   <div class="aria-sidebar" id="sidebar">
     <div class="sb-header">
       <div class="sb-title">// CONVERSACIONES</div>
-      <button class="sb-new-btn" onclick="nuevaConversacion()">[ + NUEVA CONVERSACIÓN ]</button>
+      <button class="sb-new-btn" aria-label="Nueva conversación" onclick="nuevaConversacion()">[ + NUEVA CONVERSACIÓN ]</button>
     </div>
     <div class="sb-list" id="sb-list">
       <!-- se rellena dinámicamente -->
@@ -456,7 +505,14 @@
       ARIA v1.0 · <span id="sb-count">0</span>/15 conversaciones<br>
       <span id="sb-size">localStorage: 0 KB</span>
     </div>
-    <div class="sb-toggle" id="sb-toggle" onclick="toggleSidebar()" title="Colapsar">◀</div>
+    <button
+      class="sb-toggle"
+      id="sb-toggle"
+      onclick="toggleSidebar()"
+      aria-expanded="true"
+      aria-controls="sidebar"
+      aria-label="Colapsar panel de conversaciones"
+      title="Colapsar panel">◀</button>
   </div>
 
   <!-- Overlay móvil -->
@@ -467,7 +523,7 @@
 
     <!-- Topbar -->
     <div class="aria-topbar">
-      <button class="mob-menu-btn" onclick="abrirSidebarMob()">☰</button>
+      <button class="mob-menu-btn" aria-label="Abrir menú de conversaciones" aria-expanded="false" onclick="abrirSidebarMob()">☰</button>
       <div class="aria-avatar" id="aria-avatar-wrap" title="A girl has no name" style="width:48px;height:64px;border:none;border-radius:0;background:none;box-shadow:none;animation:none;padding:0;overflow:visible;flex-shrink:0;image-rendering:pixelated;">
         <img src="data:image/png;base64,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" width="48" height="64" style="image-rendering:pixelated;display:block;" alt="ARIA"></div>
       <div class="aria-info">
@@ -476,10 +532,10 @@
         <div class="aria-status" id="aria-status">SIN NOMBRE · EN LÍNEA</div>
       </div>
       <div class="aria-topbar-btns">
-        <button class="topbar-btn" onclick="nuevaConversacion()">[ NUEVA ]</button>
-        <button class="topbar-btn danger" onclick="confirmarBorrarTodo()">[ BORRAR TODO ]</button>
+        <button class="topbar-btn" aria-label="Nueva conversación" onclick="nuevaConversacion()">[ NUEVA ]</button>
+        <button class="topbar-btn danger" aria-label="Borrar todas las conversaciones" onclick="confirmarBorrarTodo()">[ BORRAR TODO ]</button>
         <a href="index.html" style="text-decoration:none;">
-          <button class="topbar-btn">[ HUB ]</button>
+          <a href="index.html" class="topbar-btn" aria-label="Volver al Hub principal">[ HUB ]</a>
         </a>
       </div>
     </div>
@@ -513,11 +569,12 @@
           id="chat-input"
           class="chat-input"
           placeholder="Escribe tu consulta..."
+          aria-label="Escribe tu consulta a ARIA"
           maxlength="500"
           autocomplete="off"
           disabled
         >
-        <button class="chat-send-btn" id="send-btn" onclick="enviar()" disabled>ENVIAR</button>
+        <button class="chat-send-btn" id="send-btn" aria-label="Enviar mensaje" onclick="enviar()" disabled>ENVIAR</button>
       </div>
       <div class="chat-meta">
         <span>// ENTER para enviar · conversación activa: <span id="conv-titulo">—</span></span>
@@ -839,16 +896,25 @@ function mostrarTyping(v) {
 let sidebarCollapsed = false;
 function toggleSidebar() {
   sidebarCollapsed = !sidebarCollapsed;
-  document.getElementById('sidebar').classList.toggle('collapsed', sidebarCollapsed);
-  document.getElementById('sb-toggle').textContent = sidebarCollapsed ? '▶' : '◀';
+  var sidebar = document.getElementById('sidebar');
+  var btn     = document.getElementById('sb-toggle');
+  sidebar.classList.toggle('collapsed', sidebarCollapsed);
+  btn.textContent    = sidebarCollapsed ? '▶' : '◀';
+  btn.setAttribute('aria-expanded', sidebarCollapsed ? 'false' : 'true');
+  btn.setAttribute('aria-label',    sidebarCollapsed ? 'Expandir panel de conversaciones' : 'Colapsar panel de conversaciones');
+  btn.setAttribute('title',         sidebarCollapsed ? 'Expandir panel' : 'Colapsar panel');
 }
 function abrirSidebarMob() {
   document.getElementById('sidebar').classList.add('mob-open');
   document.getElementById('sb-overlay').classList.add('visible');
+  var mobBtn = document.querySelector('.mob-menu-btn');
+  if (mobBtn) mobBtn.setAttribute('aria-expanded', 'true');
 }
 function cerrarSidebarMob() {
   document.getElementById('sidebar').classList.remove('mob-open');
   document.getElementById('sb-overlay').classList.remove('visible');
+  var mobBtn = document.querySelector('.mob-menu-btn');
+  if (mobBtn) mobBtn.setAttribute('aria-expanded', 'false');
 }
 
 // ══════════════════════════════════════════════════
@@ -899,5 +965,66 @@ if (convs.length > 0) {
   nuevaConversacion();
 }
 </script>
+</main>
+<script src="accesibilidad.js"></script>
+<script>
+(function() {
+  var canvas = document.getElementById("bg-canvas");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var W, H;
+  var STAR_COUNT=90, WAVE_COUNT=5, CONN_DIST=180, SPEED=0.18, WAVE_SPEED=0.0004;
+  var COLOR_NODE_A="rgba(0, 255, 102,", COLOR_NODE_B="rgba(255, 176, 0,";
+  var COLOR_LINE="rgba(0, 220, 90,", COLOR_WAVE="rgba(255, 176, 0,";
+  var stars=[], waves=[];
+  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+  function initStars(){
+    stars=[];
+    for(var i=0;i<STAR_COUNT;i++){
+      var a=Math.random()>0.75;
+      stars.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*SPEED,vy:(Math.random()-0.5)*SPEED,r:Math.random()*1.4+0.4,col:a?COLOR_NODE_B:COLOR_NODE_A,phase:Math.random()*Math.PI*2,pspeed:0.008+Math.random()*0.012});
+    }
+  }
+  function initWaves(){
+    waves=[];
+    for(var i=0;i<WAVE_COUNT;i++){
+      waves.push({amp:30+Math.random()*60,freq:0.003+Math.random()*0.005,phase:Math.random()*Math.PI*2,speed:(Math.random()>0.5?1:-1)*(WAVE_SPEED+Math.random()*WAVE_SPEED),yBase:(i+1)*(1/(WAVE_COUNT+1)),alpha:0.018+Math.random()*0.022});
+    }
+  }
+  function drawWaves(){
+    for(var w=0;w<waves.length;w++){
+      var wv=waves[w]; wv.phase+=wv.speed*60;
+      ctx.beginPath(); ctx.moveTo(0,H*wv.yBase);
+      for(var x=0;x<=W;x+=4){ ctx.lineTo(x,H*wv.yBase+Math.sin(x*wv.freq+wv.phase)*wv.amp); }
+      ctx.strokeStyle=COLOR_WAVE+wv.alpha+")"; ctx.lineWidth=1; ctx.stroke();
+    }
+  }
+  function drawConnections(){
+    for(var i=0;i<stars.length;i++){
+      for(var j=i+1;j<stars.length;j++){
+        var dx=stars[i].x-stars[j].x,dy=stars[i].y-stars[j].y,dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<CONN_DIST){ ctx.beginPath(); ctx.moveTo(stars[i].x,stars[i].y); ctx.lineTo(stars[j].x,stars[j].y); ctx.strokeStyle=COLOR_LINE+(1-dist/CONN_DIST)*0.18+")"; ctx.lineWidth=0.5; ctx.stroke(); }
+      }
+    }
+  }
+  function drawStars(){
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i]; s.phase+=s.pspeed;
+      var pulse=0.5+0.5*Math.sin(s.phase),alpha=0.25+pulse*0.55,radius=s.r*(0.8+pulse*0.4);
+      var grad=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,radius*4);
+      grad.addColorStop(0,s.col+(alpha*0.5)+")"); grad.addColorStop(1,s.col+"0)");
+      ctx.beginPath(); ctx.arc(s.x,s.y,radius*4,0,Math.PI*2); ctx.fillStyle=grad; ctx.fill();
+      ctx.beginPath(); ctx.arc(s.x,s.y,radius,0,Math.PI*2); ctx.fillStyle=s.col+alpha+")"; ctx.fill();
+      s.x+=s.vx; s.y+=s.vy;
+      if(s.x<-20)s.x=W+20; if(s.x>W+20)s.x=-20;
+      if(s.y<-20)s.y=H+20; if(s.y>H+20)s.y=-20;
+    }
+  }
+  function draw(){ ctx.clearRect(0,0,W,H); drawWaves(); drawConnections(); drawStars(); requestAnimationFrame(draw); }
+  resize(); initStars(); initWaves(); draw();
+  window.addEventListener("resize",function(){ resize(); initStars(); initWaves(); });
+})();
+</script>
+
 </body>
 </html>

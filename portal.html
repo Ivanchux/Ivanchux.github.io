@@ -12,6 +12,7 @@
 <title>RETROTERM.AI — PORTAL</title>
 
 <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="accesibilidad.css">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 
 <!-- Breadcrumbs JSON-LD -->
@@ -268,13 +269,57 @@ h1, h2{
     opacity: 1 !important; }
 
 
+
+/* TURCO LINK */
+.turco-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  font-family: 'Courier New', monospace;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+  min-height: 44px;
+  line-height: 24px;
+}
+.turco-link:hover,
+.turco-link:focus {
+  background: #00ffff;
+  color: #000;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+/* CANVAS FONDO */
+  #bg-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.45;
+  }
+  /* fondo transparente sobre canvas */
+  .pantalla, .pantalla-wide {
+    background: transparent !important;
+    border-color: #00ff6633 !important;
+    box-shadow: 0 0 15px #00ff6622 !important;
+  }
 </style>
 
 </head>
 <body>
+<a class="skip-link" href="#main-content">→ Saltar al contenido principal</a>
+<canvas id="bg-canvas" aria-hidden="true" role="presentation" focusable="false"></canvas>
+
+<header class="sr-only">
+  <h1>Portal — RETROTERM.AI</h1>
+</header>
+
+<main id="main-content">
 
 <!-- INICIO -->
-<section id="inicio" class="pantalla seccion activa">
+<section id="inicio" class="pantalla seccion activa" aria-label="Inicio del portal">
   <nav class="silo-breadcrumb"><span class="actual">INICIO</span></nav>
   <h1>INICIO</h1>
   <p>Zona interna no documentada. Explora los módulos y descubre secretos.</p>
@@ -316,7 +361,7 @@ h1, h2{
 </section>
 
 <!-- ===== LOGS ===== -->
-<section id="logs" class="pantalla seccion">
+<section id="logs" class="pantalla seccion" aria-label="Registros del sistema">
   <nav class="silo-breadcrumb">
     <a href="#inicio">INICIO</a> <span class="sep">></span>
     <span class="actual">LOGS</span>
@@ -332,11 +377,12 @@ h1, h2{
   <div class="log-entry"><span class="log-time">[2026-03-01 10:00]</span> <span class="log-hint">PISTA</span> — El código de acceso es el año en que todo empezó. La respuesta está en INICIO.</div>
   <div class="log-entry"><span class="log-time">[2026-04-04 10:01]</span> <span class="log-warn">ACCESO RESTRINGIDO</span> — Se requiere código de 4 dígitos para continuar.</div>
 
-  <div id="puzzle">
-    <p>Introduce el código secreto:</p>
-    <input type="text" id="codigo" maxlength="4" placeholder="____">
-    <button onclick="verificarCodigo()">✓</button>
-    <div class="msg" id="msgPuzzle"></div>
+  <div id="puzzle" role="form" aria-label="Puzzle de código secreto">
+    <p id="puzzle-desc">Introduce el código secreto:</p>
+    <label for="codigo" class="sr-only">Código secreto de 4 dígitos</label>
+    <input type="text" id="codigo" maxlength="4" placeholder="____" aria-describedby="puzzle-desc msgPuzzle" inputmode="numeric" autocomplete="off">
+    <button onclick="verificarCodigo()" aria-label="Confirmar código secreto">✓</button>
+    <div class="msg" id="msgPuzzle" aria-live="polite" aria-atomic="true"></div>
   </div>
 
   <div class="silo-menu">
@@ -347,7 +393,7 @@ h1, h2{
 </section>
 
 <!-- ===== CORE ===== -->
-<section id="core" class="pantalla seccion">
+<section id="core" class="pantalla seccion" aria-label="Módulo Core del sistema">
   <nav class="silo-breadcrumb">
     <a href="#inicio">INICIO</a>
     <span class="sep">></span>
@@ -372,8 +418,9 @@ h1, h2{
       <h3>📊 Estadísticas del Proyecto</h3>
       <p>Datos internos sobre la actividad del sistema.</p>
       <table>
+        <caption class="sr-only">Estadísticas de uso por módulo</caption>
         <thead>
-          <tr><th>Módulo</th><th>Usuarios</th><th>Proyectos</th></tr>
+          <tr><th scope="col">Módulo</th><th scope="col">Usuarios</th><th scope="col">Proyectos</th></tr>
         </thead>
         <tbody>
           <tr><td>Editor</td><td>120</td><td>45</td></tr>
@@ -389,8 +436,9 @@ h1, h2{
       <h3>🗂 Estructura del Proyecto</h3>
       <p>Archivos principales del sistema RETROTERM.AI.</p>
       <table>
+        <caption class="sr-only">Estructura de archivos del proyecto RETROTERM.AI</caption>
         <thead>
-          <tr><th>Archivo</th><th>Función</th></tr>
+          <tr><th scope="col">Archivo</th><th scope="col">Función</th></tr>
         </thead>
         <tbody>
           <tr><td>index.html</td><td>HUB principal</td></tr>
@@ -414,7 +462,7 @@ h1, h2{
 </section>
 
 <!-- ===== RESTRICTED ===== -->
-<section id="restricted" class="pantalla seccion">
+<section id="restricted" class="pantalla seccion" aria-label="Zona restringida">
   <nav class="silo-breadcrumb">
     <a href="#inicio">INICIO</a> <span class="sep">></span>
     <a href="#logs">LOGS</a> <span class="sep">></span>
@@ -426,7 +474,7 @@ h1, h2{
   <p style="color:#66ffb3; font-size:0.85rem;">El Turco Mecánico lleva siglos esperando un rival digno. Ahora es tu turno.</p>
 
   <div style="text-align:center;">
-    <a href="turco.html" style="display:inline-block; margin-top:20px; padding:8px 18px; border:1px solid #00ffff; color:#00ffff; font-family:'Courier New',monospace; text-decoration:none; transition:0.3s;" onmouseover="this.style.background='#00ffff';this.style.color='#000'" onmouseout="this.style.background='transparent';this.style.color='#00ffff'">♟ TURCO_v1 — ACCESO CONCEDIDO</a>
+    <a href="turco.html" class="turco-link">♟ TURCO_v1 — ACCESO CONCEDIDO</a>
   </div>
 
   <div class="silo-menu">
@@ -435,36 +483,114 @@ h1, h2{
   </div>
 </section>
 
+</main>
+
+<footer class="sr-only">
+  <p>RETROTERM.AI — Iván Brihuega Crespo — Proyecto ASIR 2025/26</p>
+</footer>
+
 <script>
 //  NAVEGACIÓN HASH 
+// IDs válidos de secciones del portal (evitar que #main-content u otros hashes rompa la vista)
+var SECCIONES_PORTAL = ['inicio', 'logs', 'core', 'restricted'];
+
 function mostrarSeccion(id) {
+  if (!SECCIONES_PORTAL.includes(id)) return; // ignorar hashes como #main-content
   document.querySelectorAll('.pantalla').forEach(s => s.classList.remove('activa'));
-  const seccion = document.getElementById(id);
-  if (seccion) seccion.classList.add('activa');
+  var seccion = document.getElementById(id);
+  if (seccion) {
+    seccion.classList.add('activa');
+    // Mover foco al heading de la sección para lectores de pantalla
+    var heading = seccion.querySelector('h1, h2');
+    if (heading) {
+      heading.setAttribute('tabindex', '-1');
+      heading.focus({ preventScroll: false });
+    }
+  }
 }
 
 window.addEventListener('load', () => {
-  const hash = location.hash ? location.hash.substring(1) : 'inicio';
-  mostrarSeccion(hash);
+  var hash = location.hash ? location.hash.substring(1) : 'inicio';
+  mostrarSeccion(SECCIONES_PORTAL.includes(hash) ? hash : 'inicio');
 });
 window.addEventListener('hashchange', () => {
-  const hash = location.hash.substring(1);
-  mostrarSeccion(hash);
+  var hash = location.hash.substring(1);
+  if (SECCIONES_PORTAL.includes(hash)) mostrarSeccion(hash);
 });
 
 //  MINI PUZZLE 
 function verificarCodigo() {
-  const codigo = document.getElementById('codigo').value;
-  const msg = document.getElementById('msgPuzzle');
+  var codigo = document.getElementById('codigo').value;
+  var msg = document.getElementById('msgPuzzle');
   if (codigo === "1770") {
-    msg.textContent = "Código correcto. Acceso al CORE concedido.";
+    msg.textContent = "✓ Código correcto. Acceso al CORE concedido.";
     msg.style.color = "#00ffff";
     setTimeout(() => { location.hash = 'core'; }, 1000);
   } else {
-    msg.textContent = "Código incorrecto. La respuesta está más cerca de lo que crees.";
+    msg.textContent = "✗ Código incorrecto. La respuesta está más cerca de lo que crees.";
     msg.style.color = "#ff5555";
   }
 }
+</script>
+
+<script src="accesibilidad.js"></script>
+<script>
+(function() {
+  var canvas = document.getElementById("bg-canvas");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var W, H;
+  var STAR_COUNT=90, WAVE_COUNT=5, CONN_DIST=180, SPEED=0.18, WAVE_SPEED=0.0004;
+  var COLOR_NODE_A="rgba(0, 255, 102,", COLOR_NODE_B="rgba(255, 176, 0,";
+  var COLOR_LINE="rgba(0, 220, 90,", COLOR_WAVE="rgba(255, 176, 0,";
+  var stars=[], waves=[];
+  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+  function initStars(){
+    stars=[];
+    for(var i=0;i<STAR_COUNT;i++){
+      var a=Math.random()>0.75;
+      stars.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*SPEED,vy:(Math.random()-0.5)*SPEED,r:Math.random()*1.4+0.4,col:a?COLOR_NODE_B:COLOR_NODE_A,phase:Math.random()*Math.PI*2,pspeed:0.008+Math.random()*0.012});
+    }
+  }
+  function initWaves(){
+    waves=[];
+    for(var i=0;i<WAVE_COUNT;i++){
+      waves.push({amp:30+Math.random()*60,freq:0.003+Math.random()*0.005,phase:Math.random()*Math.PI*2,speed:(Math.random()>0.5?1:-1)*(WAVE_SPEED+Math.random()*WAVE_SPEED),yBase:(i+1)*(1/(WAVE_COUNT+1)),alpha:0.018+Math.random()*0.022});
+    }
+  }
+  function drawWaves(){
+    for(var w=0;w<waves.length;w++){
+      var wv=waves[w]; wv.phase+=wv.speed*60;
+      ctx.beginPath(); ctx.moveTo(0,H*wv.yBase);
+      for(var x=0;x<=W;x+=4){ ctx.lineTo(x,H*wv.yBase+Math.sin(x*wv.freq+wv.phase)*wv.amp); }
+      ctx.strokeStyle=COLOR_WAVE+wv.alpha+")"; ctx.lineWidth=1; ctx.stroke();
+    }
+  }
+  function drawConnections(){
+    for(var i=0;i<stars.length;i++){
+      for(var j=i+1;j<stars.length;j++){
+        var dx=stars[i].x-stars[j].x,dy=stars[i].y-stars[j].y,dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<CONN_DIST){ ctx.beginPath(); ctx.moveTo(stars[i].x,stars[i].y); ctx.lineTo(stars[j].x,stars[j].y); ctx.strokeStyle=COLOR_LINE+(1-dist/CONN_DIST)*0.18+")"; ctx.lineWidth=0.5; ctx.stroke(); }
+      }
+    }
+  }
+  function drawStars(){
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i]; s.phase+=s.pspeed;
+      var pulse=0.5+0.5*Math.sin(s.phase),alpha=0.25+pulse*0.55,radius=s.r*(0.8+pulse*0.4);
+      var grad=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,radius*4);
+      grad.addColorStop(0,s.col+(alpha*0.5)+")"); grad.addColorStop(1,s.col+"0)");
+      ctx.beginPath(); ctx.arc(s.x,s.y,radius*4,0,Math.PI*2); ctx.fillStyle=grad; ctx.fill();
+      ctx.beginPath(); ctx.arc(s.x,s.y,radius,0,Math.PI*2); ctx.fillStyle=s.col+alpha+")"; ctx.fill();
+      s.x+=s.vx; s.y+=s.vy;
+      if(s.x<-20)s.x=W+20; if(s.x>W+20)s.x=-20;
+      if(s.y<-20)s.y=H+20; if(s.y>H+20)s.y=-20;
+    }
+  }
+  function draw(){ ctx.clearRect(0,0,W,H); drawWaves(); drawConnections(); drawStars(); requestAnimationFrame(draw); }
+  resize(); initStars(); initWaves(); draw();
+  window.addEventListener("resize",function(){ resize(); initStars(); initWaves(); });
+})();
 </script>
 
 </body>

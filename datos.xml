@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!--
+  datos.xml — Datos estructurados de RETROTERM.AI
+  Lenguaje de Marcas y Sistemas de Gestión de Información · 1.º ASIR
+  Autor: Iván Brihuega Crespo
+  Fecha: 2026-04-13
+
+  Este fichero contiene la DTD interna que define qué etiquetas y atributos
+  se pueden usar, seguida del contenido XML con los datos reales del proyecto.
+-->
+
+<!DOCTYPE retroterm [
+
+  <!-- ══════════════════════════════════════════
+       DEFINICIÓN DE ENTIDADES
+       Abreviaturas reutilizables en el contenido
+  ══════════════════════════════════════════ -->
+  <!ENTITY autor "Iván Brihuega Crespo">
+  <!ENTITY curso  "1.º ASIR — CDM 2025/26">
+  <!ENTITY url    "https://ivanchux.github.io/">
+
+  <!-- ══════════════════════════════════════════
+       DEFINICIÓN DE ELEMENTOS (etiquetas)
+  ══════════════════════════════════════════ -->
+
+  <!-- Raíz del documento -->
+  <!ELEMENT retroterm (proyecto, red, articulos)>
+
+  <!-- ── Bloque PROYECTO ── -->
+  <!ELEMENT proyecto (nombre, descripcion, autor, version, tecnologias)>
+  <!ELEMENT nombre      (#PCDATA)>
+  <!ELEMENT descripcion (#PCDATA)>
+  <!ELEMENT autor       (#PCDATA)>
+  <!ELEMENT version     (#PCDATA)>
+  <!ELEMENT tecnologias (tecnologia+)>
+  <!ELEMENT tecnologia  (#PCDATA)>
+
+  <!-- ── Bloque RED ── -->
+  <!ELEMENT red (miembro+)>
+  <!ELEMENT miembro (nombre_miembro, url_proyecto, descripcion_proyecto)>
+  <!ELEMENT nombre_miembro      (#PCDATA)>
+  <!ELEMENT url_proyecto        (#PCDATA)>
+  <!ELEMENT descripcion_proyecto (#PCDATA)>
+
+  <!-- Atributo de miembro: rol es obligatorio y acotado -->
+  <!ATTLIST miembro
+    rol    (alumno|profesor)  #REQUIRED
+    activo (si|no)            #IMPLIED
+  >
+
+  <!-- ── Bloque ARTICULOS ── -->
+  <!ELEMENT articulos (articulo+)>
+  <!ELEMENT articulo  (titulo, categoria, fecha, resumen)>
+  <!ELEMENT titulo    (#PCDATA)>
+  <!ELEMENT categoria (#PCDATA)>
+  <!ELEMENT fecha     (#PCDATA)>
+  <!ELEMENT resumen   (#PCDATA)>
+
+  <!-- Atributos del artículo -->
+  <!ATTLIST articulo
+    id       NMTOKEN  #REQUIRED
+    publicado (si|no) #IMPLIED
+  >
+
+]>
+
+<!-- ══════════════════════════════════════════
+     CONTENIDO XML
+══════════════════════════════════════════ -->
+<retroterm>
+
+  <!-- ── Datos del proyecto ── -->
+  <proyecto>
+    <nombre>RETROTERM.AI</nombre>
+    <descripcion>Sistema retrofuturista de administración, desarrollo y comunicación entre usuarios. Combina la estética de terminales clásicos de los años 80/90 con funcionalidades modernas.</descripcion>
+    <autor>&autor;</autor>
+    <version>0.2</version>
+    <tecnologias>
+      <tecnologia>HTML5</tecnologia>
+      <tecnologia>CSS3 (Grid, Flexbox)</tecnologia>
+      <tecnologia>JavaScript</tecnologia>
+      <tecnologia>JSON-LD / Schema.org</tecnologia>
+      <tecnologia>GitHub Pages</tecnologia>
+    </tecnologias>
+  </proyecto>
+
+  <!-- ── Red de proyectos (compañeros de clase) ── -->
+  <red>
+    <miembro rol="alumno" activo="si">
+      <nombre_miembro>Iván Brihuega Crespo</nombre_miembro>
+      <url_proyecto>https://ivanchux.github.io/</url_proyecto>
+      <descripcion_proyecto>RETROTERM.AI — sistema retrofuturista principal.</descripcion_proyecto>
+    </miembro>
+    <miembro rol="alumno" activo="si">
+      <nombre_miembro>Alejandro Martínez</nombre_miembro>
+      <url_proyecto>https://alexwater2.github.io/</url_proyecto>
+      <descripcion_proyecto>Proyecto web de Alejandro Martínez.</descripcion_proyecto>
+    </miembro>
+    <miembro rol="alumno" activo="si">
+      <nombre_miembro>Sofía Estringana</nombre_miembro>
+      <url_proyecto>https://sofiae21.github.io/</url_proyecto>
+      <descripcion_proyecto>Proyecto web de Sofía Estringana.</descripcion_proyecto>
+    </miembro>
+    <miembro rol="alumno" activo="si">
+      <nombre_miembro>Daniel Martín</nombre_miembro>
+      <url_proyecto>https://danielmartin546.github.io/</url_proyecto>
+      <descripcion_proyecto>Proyecto web de Daniel Martín.</descripcion_proyecto>
+    </miembro>
+    <miembro rol="alumno" activo="si">
+      <nombre_miembro>Carlos Javier</nombre_miembro>
+      <url_proyecto>https://carlitos2202.github.io/</url_proyecto>
+      <descripcion_proyecto>Proyecto web de Carlos Javier.</descripcion_proyecto>
+    </miembro>
+    <miembro rol="alumno" activo="si">
+      <nombre_miembro>David Zhou</nombre_miembro>
+      <url_proyecto>https://davidzhou-web.github.io/</url_proyecto>
+      <descripcion_proyecto>Proyecto web de David Zhou.</descripcion_proyecto>
+    </miembro>
+  </red>
+
+  <!-- ── Artículos publicados en la web ── -->
+  <articulos>
+    <articulo id="linux" publicado="si">
+      <titulo>Comandos Linux que todo administrador debe saber</titulo>
+      <categoria>LINUX</categoria>
+      <fecha>2025-10-26</fecha>
+      <resumen>Archivos, procesos, red, usuarios y servicios. Los comandos que aparecen en los exámenes y en el mundo real.</resumen>
+    </articulo>
+    <articulo id="seo" publicado="si">
+      <titulo>Qué es el SEO técnico y por qué importa en ASIR</titulo>
+      <categoria>WEB / SEO</categoria>
+      <fecha>2025-11-06</fecha>
+      <resumen>robots.txt, sitemap.xml, meta canonical, Open Graph y Schema.org con ejemplos reales.</resumen>
+    </articulo>
+    <articulo id="sql-guia" publicado="si">
+      <titulo>SQL — Guía de Bases de Datos</titulo>
+      <categoria>BASES DE DATOS</categoria>
+      <fecha>2026-01-25</fecha>
+      <resumen>DDL, DML, DCL, SELECT, JOINs, funciones y trucos de examen para ASIR.</resumen>
+    </articulo>
+    <articulo id="sql-plantillas" publicado="si">
+      <titulo>SQL — Plantillas de consultas</titulo>
+      <categoria>BASES DE DATOS</categoria>
+      <fecha>2026-02-05</fecha>
+      <resumen>Consultas habituales listas para copiar: WHERE, JOIN, GROUP BY, subconsultas y fechas.</resumen>
+    </articulo>
+    <articulo id="sql-ejercicios" publicado="si">
+      <titulo>SQL — Ejercicios resueltos</titulo>
+      <categoria>BASES DE DATOS</categoria>
+      <fecha>2026-02-12</fecha>
+      <resumen>15 ejercicios resueltos sobre dos bases de datos: tienda con productos y empresa con empleados.</resumen>
+    </articulo>
+    <articulo id="retroterm" publicado="si">
+      <titulo>La evolución retrofuturista de RETROTERM.AI</titulo>
+      <categoria>PROYECTO</categoria>
+      <fecha>2025-10-08</fecha>
+      <resumen>Historia y evolución del proyecto RETROTERM.AI desde su concepción hasta el estado actual.</resumen>
+    </articulo>
+  </articulos>
+
+</retroterm>

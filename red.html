@@ -5,57 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RED DE PROYECTOS — RETROTERM.AI</title>
   <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="accesibilidad.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <meta property="og:title" content="Red de Proyectos — Retroterm.ai">
+  <meta name="description" content="Red de proyectos web de los compañeros de ASIR CDM 2025/26. Proyectos del curso indexados en RETROTERM.AI.">
+  <link rel="canonical" href="https://ivanchux.github.io/red.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio",           "item": "https://ivanchux.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Red de Proyectos", "item": "https://ivanchux.github.io/red.html" }
+    ]
+  }
+  </script>
   <meta property="og:description" content="Explora los proyectos de los compañeros de RETROTERM.AI">
   <meta property="og:image" content="/Imagenes/retroterm_ai.jpg">
   <meta property="og:url" content="https://ivanchux.github.io/red.html">
 
   <style>
-    .red-cabecera {
+    .red-cabecera{
       text-align: center;
       margin-bottom: 28px;
     }
-    .red-cabecera h1 {
+    .red-cabecera h1{
       font-size: 1.8rem;
       letter-spacing: 4px;
       text-shadow: 0 0 10px #00ff66;
     }
-    .red-cabecera p {
+    .red-cabecera p{
       color: #66ffb3;
       font-size: 0.78rem;
       letter-spacing: 3px;
       margin-top: 6px;
     }
-    .red-cabecera .contador {
+    .red-cabecera .contador{
       font-size: 0.68rem;
       color: #1a4a2a;
       margin-top: 8px;
       letter-spacing: 2px;
     }
 
-    .red-lista {
-      display: flex;
-      flex-wrap: wrap;
+    /* ── GRID principal de proyectos ──
+       repeat(auto-fill): rellena columnas de 260px
+       minmax(220px,1fr): se adapta al ancho disponible  */
+    .red-lista{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 18px;
       margin-top: 16px;
-      justify-content: center;
     }
 
-    .proyecto-card {
+    /* ── Cada tarjeta usa su propio grid interno con grid-template-areas ── */
+    .proyecto-card{
       border: 1px solid #00ff66;
       background: rgba(0, 15, 0, 0.85);
-      width: 260px;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      grid-template-areas:
+        "topbar"
+        "preview"
+        "body";
     }
-    .proyecto-card:hover {
+    .proyecto-card:hover{
       box-shadow: 0 0 18px rgba(0, 255, 102, 0.25);
       border-color: #66ffb3;
     }
 
-    .card-topbar {
+    .card-topbar{
+      grid-area: topbar;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -65,34 +85,35 @@
       font-size: 0.65rem;
       letter-spacing: 1px;
     }
-    .card-topbar .dot {
+    .card-topbar .dot{
       width: 7px;
       height: 7px;
       border-radius: 50%;
       background: #00ff66;
       box-shadow: 0 0 4px #00ff66;
     }
-    .card-topbar .url-label {
+    .card-topbar .url-label{
       color: #00ff66;
       font-size: 0.62rem;
       overflow: hidden;
       white-space: nowrap;
     }
 
-    .card-preview {
+    .card-preview{
+      grid-area: preview;
       width: 100%;
       height: 150px;
       background: #000;
       border-bottom: 1px solid #003300;
       overflow: hidden;
     }
-    .card-preview img {
+    .card-preview img{
       width: 100%;
       height: 100%;
       display: block;
       filter: brightness(0.85);
     }
-    .card-preview-placeholder {
+    .card-preview-placeholder{
       width: 100%;
       height: 100%;
       display: flex;
@@ -104,12 +125,13 @@
       letter-spacing: 2px;
       gap: 10px;
     }
-    .card-preview-placeholder span {
+    .card-preview-placeholder span{
       font-size: 2rem;
       opacity: 0.3;
     }
 
-    .card-body {
+    .card-body{
+      grid-area: body;
       padding: 14px;
       display: flex;
       flex-direction: column;
@@ -120,24 +142,24 @@
       font-size: 1.4rem; 
     }
 
-    .card-nombre {
+    .card-nombre{
       font-size: 0.95rem;
       color: #00ff66;
       letter-spacing: 1px;
       font-weight: bold;
     }
-    .card-autor {
+    .card-autor{
       font-size: 0.72rem;
       color: #66ffb3;
       letter-spacing: 1px;
     }
-    .card-desc {
+    .card-desc{
       font-size: 0.75rem;
       color: #aaa;
       line-height: 1.7;
       flex: 1;
     }
-    .card-btn {
+    .card-btn{
       display: block;
       padding: 7px 8px;
       background: rgba(0, 20, 0, 0.7);
@@ -151,13 +173,13 @@
       margin-top: 6px;
       transition: all 0.2s;
     }
-    .card-btn:hover {
+    .card-btn:hover{
       background: #00ff66;
       color: #000;
       box-shadow: 0 0 10px #00ff66;
     }
 
-    .red-footer {
+    .red-footer{
       margin-top: 30px;
       padding-top: 16px;
       border-top: 1px solid #003300;
@@ -175,12 +197,8 @@
     }
 
     @media (max-width: 480px){
-      .red-lista { 
-        flex-direction: column; 
-        align-items: center; 
-      }
-      .proyecto-card{ 
-        width: 100%; 
+      .red-lista {
+        grid-template-columns: 1fr;
       }
       .red-cabecera h1{ 
         font-size: 1.3rem; 
@@ -196,11 +214,36 @@
       opacity: 1 !important; 
     }
 
-  </style>
+  
+  /* ── CANVAS FONDO ─── */
+  #bg-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.45;
+  }
+  /* fondo transparente sobre canvas */
+  .pantalla, .pantalla-wide {
+    background: transparent !important;
+    border-color: #00ff6633 !important;
+    box-shadow: 0 0 15px #00ff6622 !important;
+  }
+</style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">→ Saltar al contenido principal</a>
+<canvas id="bg-canvas" aria-hidden="true" role="presentation"></canvas>
 
+<main id="main-content">
 <section id="red" class="pantalla seccion activa">
+
+  <nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <a href="index.html">INICIO</a>
+    <span class="bread-sep">&gt;</span>
+    <span class="bread-current">RED DE PROYECTOS</span>
+  </nav>
 
   <div class="red-cabecera">
     <h1>🌐 RED DE PROYECTOS</h1>
@@ -217,7 +260,7 @@
         <span class="url-label">alexwater2.github.io</span>
       </div>
       <div class="card-preview">
-        <img src="Imagenes/Red/alejandro.png" alt="Preview Alejandro">
+        <img src="Imagenes/Red/alejandro.png" alt="Captura de pantalla del proyecto web de Alejandro Martínez">
         <div class="card-preview-placeholder">
           <span>🛩️</span>
         </div>
@@ -238,7 +281,7 @@
         <span class="url-label">sofiae21.github.io</span>
       </div>
       <div class="card-preview">
-        <img src="Imagenes/Red/sofia.png" alt="Preview Sofía">
+        <img src="Imagenes/Red/sofia.png" alt="Captura del proyecto web de Sofía Estringana">
         <div class="card-preview-placeholder">
           <span>🦇</span>
         </div>
@@ -259,7 +302,7 @@
         <span class="url-label">danielmartin546.github.io</span>
       </div>
       <div class="card-preview">
-        <img src="Imagenes/Red/daniel.png" alt="Preview Daniel">
+        <img src="Imagenes/Red/daniel.png" alt="Captura del proyecto web de Daniel Martín">
         <div class="card-preview-placeholder">
           <span>🚘</span>
         </div>
@@ -280,7 +323,7 @@
         <span class="url-label">carlitos2202.github.io</span>
       </div>
       <div class="card-preview">
-        <img src="Imagenes/Red/carlos.png" alt="Preview Carlos">
+        <img src="Imagenes/Red/carlos.png" alt="Captura del proyecto web de Carlos Javier">
         <div class="card-preview-placeholder">
           <span>📡</span>
         </div>
@@ -301,7 +344,7 @@
         <span class="url-label">davidzhou-web.github.io</span>
       </div>
       <div class="card-preview">
-        <img src="Imagenes/Red/david.png" alt="Preview David">
+        <img src="Imagenes/Red/david.png" alt="Captura del proyecto web de David Zhou">
         <div class="card-preview-placeholder">
           <span>🐱‍💻</span>
         </div>
@@ -325,5 +368,66 @@
   </div>
 
 </section>
+</main>
+<script src="accesibilidad.js"></script>
+<script>
+(function() {
+  var canvas = document.getElementById("bg-canvas");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var W, H;
+  var STAR_COUNT=90, WAVE_COUNT=5, CONN_DIST=180, SPEED=0.18, WAVE_SPEED=0.0004;
+  var COLOR_NODE_A="rgba(0, 255, 102,", COLOR_NODE_B="rgba(255, 176, 0,";
+  var COLOR_LINE="rgba(0, 220, 90,", COLOR_WAVE="rgba(255, 176, 0,";
+  var stars=[], waves=[];
+  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+  function initStars(){
+    stars=[];
+    for(var i=0;i<STAR_COUNT;i++){
+      var a=Math.random()>0.75;
+      stars.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*SPEED,vy:(Math.random()-0.5)*SPEED,r:Math.random()*1.4+0.4,col:a?COLOR_NODE_B:COLOR_NODE_A,phase:Math.random()*Math.PI*2,pspeed:0.008+Math.random()*0.012});
+    }
+  }
+  function initWaves(){
+    waves=[];
+    for(var i=0;i<WAVE_COUNT;i++){
+      waves.push({amp:30+Math.random()*60,freq:0.003+Math.random()*0.005,phase:Math.random()*Math.PI*2,speed:(Math.random()>0.5?1:-1)*(WAVE_SPEED+Math.random()*WAVE_SPEED),yBase:(i+1)*(1/(WAVE_COUNT+1)),alpha:0.018+Math.random()*0.022});
+    }
+  }
+  function drawWaves(){
+    for(var w=0;w<waves.length;w++){
+      var wv=waves[w]; wv.phase+=wv.speed*60;
+      ctx.beginPath(); ctx.moveTo(0,H*wv.yBase);
+      for(var x=0;x<=W;x+=4){ ctx.lineTo(x,H*wv.yBase+Math.sin(x*wv.freq+wv.phase)*wv.amp); }
+      ctx.strokeStyle=COLOR_WAVE+wv.alpha+")"; ctx.lineWidth=1; ctx.stroke();
+    }
+  }
+  function drawConnections(){
+    for(var i=0;i<stars.length;i++){
+      for(var j=i+1;j<stars.length;j++){
+        var dx=stars[i].x-stars[j].x,dy=stars[i].y-stars[j].y,dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<CONN_DIST){ ctx.beginPath(); ctx.moveTo(stars[i].x,stars[i].y); ctx.lineTo(stars[j].x,stars[j].y); ctx.strokeStyle=COLOR_LINE+(1-dist/CONN_DIST)*0.18+")"; ctx.lineWidth=0.5; ctx.stroke(); }
+      }
+    }
+  }
+  function drawStars(){
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i]; s.phase+=s.pspeed;
+      var pulse=0.5+0.5*Math.sin(s.phase),alpha=0.25+pulse*0.55,radius=s.r*(0.8+pulse*0.4);
+      var grad=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,radius*4);
+      grad.addColorStop(0,s.col+(alpha*0.5)+")"); grad.addColorStop(1,s.col+"0)");
+      ctx.beginPath(); ctx.arc(s.x,s.y,radius*4,0,Math.PI*2); ctx.fillStyle=grad; ctx.fill();
+      ctx.beginPath(); ctx.arc(s.x,s.y,radius,0,Math.PI*2); ctx.fillStyle=s.col+alpha+")"; ctx.fill();
+      s.x+=s.vx; s.y+=s.vy;
+      if(s.x<-20)s.x=W+20; if(s.x>W+20)s.x=-20;
+      if(s.y<-20)s.y=H+20; if(s.y>H+20)s.y=-20;
+    }
+  }
+  function draw(){ ctx.clearRect(0,0,W,H); drawWaves(); drawConnections(); drawStars(); requestAnimationFrame(draw); }
+  resize(); initStars(); initWaves(); draw();
+  window.addEventListener("resize",function(){ resize(); initStars(); initWaves(); });
+})();
+</script>
+
 </body>
 </html>
